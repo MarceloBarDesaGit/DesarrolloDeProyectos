@@ -2,6 +2,7 @@ package datos;
 
 import java.time.LocalDate;
 
+import funciones.Funciones;
 
 public class Cliente {
 	private long idCliente;
@@ -81,11 +82,11 @@ public class Cliente {
 	
 //-------------------------------------
 //tostring		
-//	@Override
-//	public String toString() {
-//		return "Cliente [Id.: " + idCliente + " - Apellido= y Nombre: " + apellido + ", " + nombre + " - DNI: " + dni 
-//				+ "  F.de Nacimiento: " + funciones.Funciones.traerFechaCorta(fechaDeNacimiento) + " - " + baja + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Cliente [Id.: " + idCliente + " - Apellido= y Nombre: " + apellido + ", " + nombre + " - DNI: " + dni 
+				+ "  F.de Nacimiento: " + funciones.Funciones.traerFechaCorta(fechaDeNacimiento) + " - " + baja + "]";
+	}
 
 	
 	
