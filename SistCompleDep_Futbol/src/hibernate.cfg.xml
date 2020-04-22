@@ -1,0 +1,74 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!-- 
+ * Tipo: configuración completa de propiedades hibernate.
+ * Extensión: .XML
+ * Nombre archivo: hibernate.cfg.xml
+ * Descripción: Contiene las configuraciones relacionadas con la base de datos y las
+ *	            configuraciones relacionadas con la sesión.
+ *				La configuración de la base de datos incluye:
+ *				URL de conexión del JDBC
+ *				Credenciales del usuario de DB
+ *				Clase de Controlador.
+ *				Dialecto de hibernación.
+ * Fecha: 22/02/2020
+ * Version:  1.1.2202.0001    
+ * Autor: Barbieri Marcelo E.
+ * Modificación: __/__/2020. 
+ * Tipo de Modificación:
+ * *******************************************************************************
+-->
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD
+3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd" >
+<!--
+	DOCTYPE 	Hace referencia al documento 
+				http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd DTD que permite validarlo. 
+	Podremos	 saber todos los elementos que hay en un fichero de mapeo.
+	<hibernate-configuration> 
+	<hibernate-configuration> 
+	<session-factory>	 Contendrá la configuración de hibernate.
+	<property>			 Establece cada Propiedad de la configuración 	
+		connection.driver_class:  Contiene la FQCN del driver de la base de datos a usar.
+		connection.url:        La URL de conexión a la base de datos tal y como se usa en JDBC	
+		connection.username:   El usuario de la base de datos
+		connection.password:   La contraseña de la base de datos	
+		dialect:               El lenguaje de SQL que usará Hibernate contra la base de datos. Este parámetro es opcional
+                      		     ya que hibernate lo puede intentar deducir a partir de los datos de la conexión 4). Los posibles 
+                                 valores de esta propiedad de configuración son la FQCN de una clase Java que extienda de 
+                                 la clase org.hibernate.dialect.Dialect. La lista de dialectos que soporta hibernate se
+                                 encuentra en el paquete org.hibernate.dialect.	
+		hibernate.show_sql:    Propiedad opcional que indica si se mostrará por la consola la SQL que lanza Hibernate contra 
+                                 la base de datos. Su posibles valores son true o false. Esta propiedad es muy útil mientras 
+                                 programamos ya que nos ayudará a entender cómo está funcionanado Hibernate	
+		connection.datasource; Indica el nombre del DataSource con el que se conectará Hibernate a la base de datos. En caso de 
+		                        estar esta propiedad no debería estar ninguna de las 4 primeras propiedades sobre la conexión o viceversa.
+		                        Esta propiedad se usa en aplicaciones Web ya que los datos de la conexión se definen en el servidor de 
+		                        aplicaciones y se accede a la base de datos a través del DataSource.	
+	<mapping>           Se usa para indicarle a Hibernate el Nombre de un arvjivo .hbm.xml asociado a la CLASE que queremos persistir. 
+	                      Este tag se usa de 2 formas distintas:
+                               1. Indicando el nombre del fichero de mapeo ".hbm.xml"
+                                         EJEMPLO:  <mapping resource="mapeos/Profesor.hbm.xml"/>
+                               
+                               2. Indicando la FQCN (Fully-Qualified Class Name) de la clase Java que hemos anotado	
+                                         EJEMPLO:  <mapping class="mapeos.Profesor"/>
+     Referencia; http://www.cursohibernate.es/doku.php?id=unidades:02_hibernate:03_configurando#fqcn_de_la_clase_java
+ -->
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.driver_class"> com.mysql.jdbc.Driver </property> 
+		<property name="connection.url">jdbc:mysql://localhost/bd-ComlejoDepoAylen</property>
+		<property name="connection.username"> root </property>
+		<property name="connection.password">  </property>        <!-- SI NO TIENE PASSWORD SE DEJA VACIO  -->
+		<property name="connection.pool_size"> 1 </property>
+		<property name="dialect"> org.hibernate.dialect.MySQLDialect </property>
+    <!-- TRUE   MUESTRA el hql en consola -->
+		<property name="show_sql"> true </property> 
+		
+	<!-- Mapeo de TODAS las Entidades -->
+		<mapping resource="mapeos/Cliente.hbm.xml" /> 
+   <!-- <mapping resource="mapeos/Clase.hbm.xml" /> -->
+   <!-- <mapping resource="mapeos/Clase.hbm.xml" /> -->		 
+	</session-factory>
+</hibernate-configuration>
+
+
+
