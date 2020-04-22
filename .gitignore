@@ -1,5 +1,14 @@
 # Compiled class file
-*.class
+.classpath
+
+# Project
+.project
+
+# Configuracion
+.setting/*
+
+# Arhivos Bin
+bin/*
 
 # Log file
 *.log
