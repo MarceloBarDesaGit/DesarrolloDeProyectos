@@ -14,11 +14,9 @@ public class Cliente {
 
 	
 //-------------------------------------
-//Constructor
-	public Cliente() { 	   // SIEMPRE HAY que implementar el contructor VACIO
-		
-	}
-	
+//Constructores
+	public Cliente() {}  // SIEMPRE HAY que implementar el contructor VACIO
+
 	// IMPORTANTE:  NUNCA VA EL  id  --> En el constructor por ser autoincrementable
 	public Cliente(String apellido, String nombre, int dni, LocalDate fechaDeNacimiento) { 
 		super();
