@@ -7,7 +7,11 @@ public class Equipo {
 	private int codEquipo;				//PK   las PK son cod_____
 	private String nombreEquipo;
 	private int cgoZona;                //FK   las FK son cgo_____
-	private LocalDate fechaEquipoAlta; 
+	private LocalDate fechaEquipoAlta;
+  //---
+	private char controlEquipo;
+	private LocalDate fechaCtrlEquipo; // Solo para las Bajas
+	private LocalDate fechaModifEquipo; // Fecha de Modificaión para Altas y Modificaciones
 //-------------------------------------
 //Constructores
 	public Equipo() {}  // SIEMPRE HAY que implementar el contructor VACIO
@@ -19,6 +23,10 @@ public class Equipo {
 		this.nombreEquipo = nombreEquipo;
 		this.fechaEquipoAlta = fechaEquipoAlta;
 		this.cgoZona = cgoZona;
+		// ----------
+		this.controlEquipo = 'A';
+		this.fechaCtrlEquipo = LocalDate.now();
+		this.fechaModifEquipo = LocalDate.now();
 	}
 
 //-------------------------------------
@@ -65,13 +73,60 @@ public class Equipo {
 		this.fechaEquipoAlta = fechaEquipoAlta;
 	}
 
+//--------- CONTROL ----------------
+	public LocalDate getFechaModifEquipo() {
+		return fechaModifEquipo;
+	}
+
+	public void setFechaModifEquipo(LocalDate fechaModifEquipo) {
+		this.fechaModifEquipo = fechaModifEquipo;
+	}
+
+	public char getControlEquipo() {
+		return controlEquipo;
+	}
+
+	public void setControlEquipo(char controlEquipo) {
+		this.controlEquipo = controlEquipo;
+	}
+
+	public LocalDate getFechaCtrlEquipo() {
+		return fechaCtrlEquipo;
+	}
+
+	public void setFechaCtrlEquipo(LocalDate fechaCtrlEquipo) {
+		this.fechaCtrlEquipo = fechaCtrlEquipo;
+	}
+	
 //-------------------------------------
 //tostring	
 	@Override
 	public String toString() {
+		String estadoProd = "";
+		switch (this.getControlEquipo()) {
+		case 'A':
+			estadoProd = "Agregado";
+			break;
+		case 'B':
+			estadoProd = "Eliminado";
+			break;
+		case 'M':
+			estadoProd = "Modificado";
+			break;
+		default:
+			break;
+		}
 		return "Equipo [ " + idEquipo + "]  Codigo del Equipo:" + codEquipo + " - " + nombreEquipo
 				+ "      \ncodZona:" + cgoZona
-	            + "      \nFecha de Alta:" + funciones.Funciones.traerFechaCorta(fechaEquipoAlta);		
+	            + "      \nFecha de Alta: " + funciones.Funciones.traerFechaCorta(fechaEquipoAlta)
+                + "      \nEatado Actual: [ " + estadoProd + " - " + funciones.Funciones.traerFechaCorta(getFechaCtrlEquipo()) + " ]"
+                + "      \nFecha de Modificación: [ " + funciones.Funciones.traerFechaCorta(getFechaModifEquipo()) +" ]";
 	}
 
+	
+	
+	
+	
+	
+	
 }// Fin Equipo

@@ -5,10 +5,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 //--------
-import datos.Cliente;
+import datos.Zona;
 
-
-public class ClienteDao {
+public class ZonaDao {
 	private static Session session;
 	private Transaction tx;
 	
@@ -26,7 +25,7 @@ public class ClienteDao {
 //-------------------------------------------------------
 //   Agregar-Eliminar-Modificar-Traer - List de Contacto
 //-------------------------------------------------------
-	public int agregar(Cliente objeto) {
+	public int agregar(Zona objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();  // Se abre la conexión con la session a la ND
@@ -48,7 +47,7 @@ public class ClienteDao {
 		return id;
 	}
 
-	public void actualizar(Cliente objeto) throws HibernateException {
+	public void actualizar(Zona objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -68,8 +67,8 @@ public class ClienteDao {
 		}
 	}
 
-	// Borrado Fisico  - BUSCAR SI EXISREN LAS DEPENDENCIAS
-	public void eliminar(Cliente objeto) throws HibernateException {
+	// Borrado Fisico  - BUSCAR SI EXISTEN LAS DEPENDENCIAS
+	public void eliminar(Zona objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -83,11 +82,11 @@ public class ClienteDao {
 	}
 	
 	// Borrado Logico
-	public void Borrar(Cliente objeto) throws HibernateException {
+	public void Borrar(Zona objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 		//--Control del nuevo Estado
-			// para la tabla de Cliente que me pide el estado.
+			// para la tabla de Zona que me pide el estado.
 			// Estafo = "A"
 			//FechaCtrl=xx/xx/xx
 			//FechaModf=xx/xx/xx
@@ -101,49 +100,54 @@ public class ClienteDao {
 	}
 	
 //------------------------------------------------------
+/*
+TIPOS DE LISTADOS
+traer idZona	         uniqueResult()
+	  nombreZona       uniqueResult()
+    //--------  
+      traer()            list()   traer todos los Zonas	
+*/
+	
 //Cuando se debe traer el ID de cualquier Tabla...
 //      SE DE DEBE USAR UN session.Get(...) ---> SIEMPRE 
-	public Cliente traer(long idCliente) throws HibernateException {
-		Cliente objeto = null;
+	public Zona traer(long idZona) throws HibernateException {
+		Zona objeto = null;
 		try {
-			iniciaOperacion();   // abro la conexion a la session
-			//Casteo del tipo Cliente
-			objeto = (Cliente) session.get(Cliente.class, idCliente);
+			iniciaOperacion();
+			//Casteo del tipo Zona
+			objeto = (Zona) session.get(Zona.class, idZona);
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 
-  //Cuando se debe traer una consulta por cualquier otro tipo de campo
-  //       que no sea el Id, SE DEBE HACER UNA HQL----> SIEMPRE
-	public Cliente traer(int dni) throws HibernateException {
-		Cliente objeto = null;
+	public Zona traer(String nombre) throws HibernateException {
+		Zona objeto = null;
 		try {
 			iniciaOperacion();
-        //-------------
-		// USO de una Variable con la Query
-		// String query = "from clientes where c.dni ="+dni;
-		//objeto = (Cliente) session.createQuery(query).uniqueResult();
-		//-------------	
-			//Casteo del tipo Cliente
-			objeto = (Cliente) session.createQuery("from Cliente c where c.dni=" + dni).uniqueResult();
+		  //Casteo del tipo Zona
+			objeto = (Zona) session.createQuery("from Zona z where z.nombreZona=" + nombre).uniqueResult();
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
-//-------------------------
+	
+//---------Listados Generales -----------------
 	@SuppressWarnings("unchecked")
-	public List<Cliente> traer() throws HibernateException {
-		List<Cliente> lista = null;
+	public List<Zona> traer() throws HibernateException {
+		List<Zona> lista = null;
 		try {
 			iniciaOperacion();
-		 // Variable que GUARDA todo el recordSet de la tabla
-			lista = session.createQuery("from Cliente c order by c.apellido asc c.nombre asc").list();
+	        String query = "from Zona z order by z.nombreZona asc";
+			lista = session.createQuery(query).list();
 		} finally {
 			session.close();
 		}
 		return lista;
-	}
-}
+	}	
+
+//-----------------	
+}//Fin ZonaDao
+
