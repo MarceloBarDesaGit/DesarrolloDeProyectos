@@ -1,17 +1,19 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class Equipo {
 	private int idEquipo;
-	private int codEquipo;				//PK   las PK son cod_____
+	private int codEquipo;				 // PK   las PK son cod_____
 	private String nombreEquipo;
-	private int cgoZona;                //FK   las FK son cgo_____
+	private Set<Zona> cgoZona;           // FK   las FK son cgo_____ 
 	private LocalDate fechaEquipoAlta;
-  //---
+	private Set<Jugador> cgojugador;     // Relación UaM
+	//---
 	private char controlEquipo;
-	private LocalDate fechaCtrlEquipo; // Solo para las Bajas
-	private LocalDate fechaModifEquipo; // Fecha de Modificaión para Altas y Modificaciones
+	private LocalDate fechaCtrlEquipo;   // Solo para las Bajas
+	private LocalDate fechaModifEquipo;  // Fecha de Modificaión para Altas y Modificaciones
 //-------------------------------------
 //Constructores
 	public Equipo() {}  // SIEMPRE HAY que implementar el contructor VACIO
@@ -22,7 +24,6 @@ public class Equipo {
 		this.codEquipo = codEquipo;
 		this.nombreEquipo = nombreEquipo;
 		this.fechaEquipoAlta = fechaEquipoAlta;
-		this.cgoZona = cgoZona;
 		// ----------
 		this.controlEquipo = 'A';
 		this.fechaCtrlEquipo = LocalDate.now();
@@ -57,13 +58,6 @@ public class Equipo {
 		this.nombreEquipo = nombreEquipo;
 	}
 
-	public int getCgoZona() {
-		return cgoZona;
-	}
-
-	public void setCgoZona(int cgoZona) {
-		this.cgoZona = cgoZona;
-	}
 
 	public LocalDate getFechaEquipoAlta() {
 		return fechaEquipoAlta;
@@ -71,6 +65,24 @@ public class Equipo {
 
 	public void setFechaEquipoAlta(LocalDate fechaEquipoAlta) {
 		this.fechaEquipoAlta = fechaEquipoAlta;
+	}
+	
+	//------ Set<Clase> ------
+
+	public Set<Zona> getCgoZona() {
+		return cgoZona;
+	}
+
+	public void setCgoZona(Set<Zona> cgoZona) {
+		this.cgoZona = cgoZona;
+	}	
+		
+	public Set<Jugador> getCgojugador() {
+		return cgojugador;
+	}
+
+	public void setCgojugador(Set<Jugador> cgojugador) {
+		this.cgojugador = cgojugador;
 	}
 
 //--------- CONTROL ----------------
@@ -102,16 +114,16 @@ public class Equipo {
 //tostring	
 	@Override
 	public String toString() {
-		String estadoProd = "";
+		String estadoEqui = "";
 		switch (this.getControlEquipo()) {
 		case 'A':
-			estadoProd = "Agregado";
+			estadoEqui = "Agregado";
 			break;
 		case 'B':
-			estadoProd = "Eliminado";
+			estadoEqui = "Eliminado";
 			break;
 		case 'M':
-			estadoProd = "Modificado";
+			estadoEqui = "Modificado";
 			break;
 		default:
 			break;
@@ -119,7 +131,7 @@ public class Equipo {
 		return "Equipo [ " + idEquipo + "]  Codigo del Equipo:" + codEquipo + " - " + nombreEquipo
 				+ "      \ncodZona:" + cgoZona
 	            + "      \nFecha de Alta: " + funciones.Funciones.traerFechaCorta(fechaEquipoAlta)
-                + "      \nEatado Actual: [ " + estadoProd + " - " + funciones.Funciones.traerFechaCorta(getFechaCtrlEquipo()) + " ]"
+                + "      \nEatado Actual: [ " + estadoEqui + " - " + funciones.Funciones.traerFechaCorta(getFechaCtrlEquipo()) + " ]"
                 + "      \nFecha de Modificación: [ " + funciones.Funciones.traerFechaCorta(getFechaModifEquipo()) +" ]";
 	}
 
@@ -128,5 +140,5 @@ public class Equipo {
 	
 	
 	
-	
+//------------------	
 }// Fin Equipo
