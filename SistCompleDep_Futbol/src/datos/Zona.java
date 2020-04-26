@@ -1,21 +1,17 @@
 package datos;
 
 public class Zona {
-	private int idZona;
-	private int codZona;          // PK las PK son cod_____
-	private String nombreZona;
-	private int cgoTorneo;        // FK las FK son cgo_____
-
+	private int idZona;            // PK   1     
+	private String nombreZona;    //        Senior A B C - Libre A B C - Veterano A B C - Empresa A B C - Colegio A B C
+	private int cgoTorneo;        // FK son cgo__
 //-------------------------------------
 //Constructores
 
 	public Zona() {
 	}
 
-	public Zona(int idZona, int codZona, String nombreZona, int cgoTorneo) {
+	public Zona(String nombreZona, int cgoTorneo) {
 		super();
-		this.idZona = idZona;
-		this.codZona = codZona;
 		this.nombreZona = nombreZona;
 		this.cgoTorneo = cgoTorneo;
 	}
@@ -26,16 +22,8 @@ public class Zona {
 		return idZona;
 	}
 
-	public void setIdZona(int idZona) {
+	protected void setIdZona(int idZona) {
 		this.idZona = idZona;
-	}
-
-	public int getCodZona() {
-		return codZona;
-	}
-
-	protected void setCodZona(int codZona) {
-		this.codZona = codZona;
 	}
 //--------
 
@@ -59,8 +47,7 @@ public class Zona {
 //tostring	
 	@Override
 	public String toString() {
-		return "Zona [ " + idZona + "] Codigo de la Zona: " + codZona + " - " + nombreZona + " - Codigo de Torneo="
-				+ cgoTorneo;
+		return "Zona [ " + idZona + "] - " + nombreZona + " - Codigo de Torneo: " + cgoTorneo;
 	}
 
 }

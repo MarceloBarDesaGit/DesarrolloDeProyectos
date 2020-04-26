@@ -1,23 +1,21 @@
 package datos;
 
+import java.util.Set;
+
 public class Categoria {
 
-	private int idCategoria;
-	private int codCategoria; // PK las PK son cod_____
+	private int idCategoria;    // PK con cod___
 	private String Categoria;
-	private int cgoZona; // FK las FK son cgo_____
+	private Set<Zona> cgoZona;  // FK con cgo___ 
 
 //-------------------------------------
 //Constructores
 	public Categoria() {
 	}
 
-	public Categoria(int idCategoria, int codCategoria, String categoria, int cgoZona) {
+	public Categoria(String categoria) {
 		super();
-		this.idCategoria = idCategoria;
-		this.codCategoria = codCategoria;
 		Categoria = categoria;
-		this.cgoZona = cgoZona;
 	}
 
 //-------------------------------------
@@ -26,19 +24,11 @@ public class Categoria {
 		return idCategoria;
 	}
 
-	public void setIdCategoria(int idCategoria) {
+	protected void setIdCategoria(int idCategoria) {
 		this.idCategoria = idCategoria;
 	}
-
-	public int getCodCategoria() {
-		return codCategoria;
-	}
-
-	protected void setCodCategoria(int codCategoria) {
-		this.codCategoria = codCategoria;
-	}
-
 //-----------
+	
 	public String getCategoria() {
 		return Categoria;
 	}
@@ -47,20 +37,19 @@ public class Categoria {
 		Categoria = categoria;
 	}
 
-	public int getCgoZona() {
+	public Set<Zona> getCgoZona() {
 		return cgoZona;
 	}
 
-	public void setCgoZona(int cgoZona) {
+	public void setCgoZona(Set<Zona> cgoZona) {
 		this.cgoZona = cgoZona;
-	}
-
+	}	
+	
 //-------------------------------------
 //tostring	
 	@Override
 	public String toString() {
-		return "Categoria [ " + idCategoria + "]  Codigo de Categoria:" + codCategoria + "  -  " + Categoria
-				+ "  Codigo de la Zona: " + cgoZona;
+		return "Categoria [ " + idCategoria + "] - " + Categoria;
 	}
 
 //------------------------

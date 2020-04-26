@@ -4,8 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;         // debo importar cuando uso Set<Equipo>
 
 public class Jugador extends Persona {
-	private int idJugador;
-	private String codJugador;      //FK   las PK son cod_____	
+	private int idJugador;          //PK con cod_____	    
     private int golesJugador;
     private int tarjAmaJugador;
     private int tarjRojaJugador;
@@ -22,10 +21,9 @@ public class Jugador extends Persona {
 	
 public Jugador(String dni, String nombre, String apellido, LocalDate fechaNacimiento,
 		LocalDate fechaDeAlta, int edad, String username, String password, 
-		String codJugador, int golesJugador, int tarjAmaJugador, int tarjRojaJugador,
+		int golesJugador, int tarjAmaJugador, int tarjRojaJugador,
 		char controlJugador, LocalDate fechaCtrlJugador, LocalDate fechaModifJugador) {
 	super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
-		this.codJugador = codJugador;
 		this.golesJugador = golesJugador;
 		this.tarjAmaJugador = tarjAmaJugador;
 		this.tarjRojaJugador = tarjRojaJugador;
@@ -45,13 +43,6 @@ public Jugador(String dni, String nombre, String apellido, LocalDate fechaNacimi
 		this.idJugador = idJugador;
 	}
 	//----
-	public String getCodJugador() {
-		return codJugador;
-	}
-
-	public void setCodJugador(String codJugador) {
-		this.codJugador = codJugador;
-	}
 
 	public int getGolesJugador() {
 		return golesJugador;
@@ -128,7 +119,7 @@ public Jugador(String dni, String nombre, String apellido, LocalDate fechaNacimi
 		default:
 			break;
 		}
-		return "Jugador: " + super.toString() + "      \nID: [ " + idJugador + " ] Codigo de Jugador: " + codJugador
+		return "Jugador: " + super.toString() + "      \nID: [ " + idJugador + " ]"
 				+ "      \nGoles: " + golesJugador + ", Tarjetas Amarillas: " + tarjAmaJugador + " Tarjetas Rojas: "
 				+ tarjRojaJugador + "      \nNúmero de Equipo: " + cgoEquipo + "      \nEstado: " + estadoJug + " -  "
 				+ funciones.Funciones.traerFechaCorta(getFechaCtrlJugador()) + ", Modificación de datos: "

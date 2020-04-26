@@ -3,15 +3,15 @@ package datos;
 import java.time.LocalDate;
 
 public class Persona {
-	private int idPersona;
-	private String dni;
-	private String nombre;
-	private String apellido;
-	private LocalDate fechaNacimiento;
-	private LocalDate fechaDeAlta;
-    private int edad;
-	private String username;
-	private String password;
+	private int idPersona;               //PK 1354
+	private String dni;                  //   12345678
+	private String nombre;               // Marcelo
+	private String apellido;             // Barbieri
+	private LocalDate fechaNacimiento;   // 25/04/63
+	private LocalDate fechaDeAlta;       // 26/04/20
+    private int edad;                    // 56
+	private String username;             // MarceloBar  
+	private String password;             // 1234MEB
 
 //-------------------------------------
 //Constructores	

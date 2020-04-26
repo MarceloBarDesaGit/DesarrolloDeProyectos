@@ -4,8 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class Equipo {
-	private int idEquipo;
-	private int codEquipo;				 // PK   las PK son cod_____
+	private int idEquipo;                //  PK con cod_____
 	private String nombreEquipo;
 	private Set<Zona> cgoZona;           // FK   las FK son cgo_____ 
 	private LocalDate fechaEquipoAlta;
@@ -19,9 +18,8 @@ public class Equipo {
 	public Equipo() {}  // SIEMPRE HAY que implementar el contructor VACIO
 
 // IMPORTANTE:  NUNCA VA EL  id  --> En el constructor por ser autoincrementable
-	public Equipo(int codEquipo, String nombreEquipo, int cgoZona, LocalDate fechaEquipoAlta) {
+	public Equipo(String nombreEquipo, int cgoZona, LocalDate fechaEquipoAlta) {
 		super();
-		this.codEquipo = codEquipo;
 		this.nombreEquipo = nombreEquipo;
 		this.fechaEquipoAlta = fechaEquipoAlta;
 		// ----------
@@ -41,14 +39,6 @@ public class Equipo {
 		this.idEquipo = idEquipo;
 	}
 //----------------
-
-	public int getCodEquipo() {
-		return codEquipo;
-	}
-
-	public void setCodEquipo(int codEquipo) {
-		this.codEquipo = codEquipo;
-	}
 
 	public String getNombreEquipo() {
 		return nombreEquipo;
@@ -128,17 +118,13 @@ public class Equipo {
 		default:
 			break;
 		}
-		return "Equipo [ " + idEquipo + "]  Codigo del Equipo:" + codEquipo + " - " + nombreEquipo
+		return "Equipo [ " + idEquipo + "] - " + nombreEquipo
 				+ "      \ncodZona:" + cgoZona
 	            + "      \nFecha de Alta: " + funciones.Funciones.traerFechaCorta(fechaEquipoAlta)
                 + "      \nEatado Actual: [ " + estadoEqui + " - " + funciones.Funciones.traerFechaCorta(getFechaCtrlEquipo()) + " ]"
                 + "      \nFecha de Modificación: [ " + funciones.Funciones.traerFechaCorta(getFechaModifEquipo()) +" ]";
 	}
 
-	
-	
-	
-	
 	
 //------------------	
 }// Fin Equipo

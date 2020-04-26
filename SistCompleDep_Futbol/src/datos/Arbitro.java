@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class Arbitro extends Persona {
-	private int idArbitro;
-	private String nomreArbitro;
-	private String apellidoArbitro;
-	private int celuArbitro;
-	private Set<Partido> partidos;
+	private int idArbitro;           // PK 40
+	private String nomreArbitro;     //    Juan
+	private String apellidoArbitro;  //    Quiroz
+	private int celuArbitro;         //    1150364587
 //-------------------------------------
 //Constructores
 
@@ -16,7 +15,8 @@ public class Arbitro extends Persona {
 	}
 
 	public Arbitro(String dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
-			int edad, String username, String password, String nomreArbitro, String apellidoArbitro, int celuArbitro) {
+			int edad, String username, String password, 
+			String nomreArbitro, String apellidoArbitro, int celuArbitro) {
 		super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
 		this.nomreArbitro = nomreArbitro;
 		this.apellidoArbitro = apellidoArbitro;
@@ -56,21 +56,13 @@ public class Arbitro extends Persona {
 	public void setCeluArbitro(int celuArbitro) {
 		this.celuArbitro = celuArbitro;
 	}
-	//-------------
-	public Set<Partido> getPartidos() {
-		return partidos;
-	}
-
-	public void setPartidos(Set<Partido> partidos) {
-		this.partidos = partidos;
-	}
 	
 //-------------------------------------
 //tostring	
 	@Override
 	public String toString() {
 		return "Arbitro: " + super.toString() 
-		+ "      \nID: [ " + idArbitro + " ] Nombre y Apellido: " + nomreArbitro + " " + apellidoArbitro + " - Celula: " + celuArbitro;
+		+ "      \nID: [ " + idArbitro + " ] Nombre y Apellido: " + nomreArbitro + " " + apellidoArbitro + " - Celular: " + celuArbitro;
 	}
 //----------------
 }// Fin Arbitro

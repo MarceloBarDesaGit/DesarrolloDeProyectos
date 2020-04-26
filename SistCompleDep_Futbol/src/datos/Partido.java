@@ -4,28 +4,25 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class Partido {
-	private int idPartido;
-	private int codPartido;               // PK las PK son cgo_____
-	private int jornadaCampPartido;
-	private LocalDate fechaPartido;
-	private Set<Campeonato> cgocampeonato;   // Relación UaU
-	private Set<Torneo> cgotorneo;           // Relación UaU
-	private Set<Categoria> cgocategoria;     // Relación UaU
-	private Set<CanchaHora> cgocanchaHora;   // Relación UaU
-	private Set<Equipo> cgoequipoLocPArtido; // Relación UaU
-	private int resultadoLocPartido;
-	private Set<Equipo> cgoequipoVisPArtido; // Relación UaU
-	private int resultadoVisPartido;
-	
+	private int idPartido;                   // PK con cgo____  187          
+	private int jornadaCampPartido;          //                 8
+	private LocalDate fechaPartido;          //                 26/04/2020
+	private Set<Campeonato> cgocampeonato;   // Relación UaU    Apertura IDA
+	private Set<Torneo> cgotorneo;           // Relación UaU    Torneo Liga Aylen Bco. Frances 
+	private Set<Categoria> cgoCategoria;     // Relación UaU    Senior    / Libre / Veteranos / Empresa / Colegios
+	private Set<CanchaHora> cgoCanchaHora;   // Relación UaU    Aylen 1 - 09:00
+	private Set<Equipo> cgoEquipoLocPartido; // Relación UaU    Equipo AAA
+	private int resultadoLocPartido;         //                 3       
+	private Set<Equipo> cgoEquipoVisPartido; // Relación UaU    Equipo BBB
+	private int resultadoVisPartido;         //                 1
+	private Set<Arbitro> cgoArbitroPartido;  // Relación UaU    40 (Juan Quiroz)
 //-------------------------------------
 //Constructores
 	public Partido() {}
 	
-	public Partido(int idPartido, int codPartido, int jornadaCampPartido, LocalDate fechaPartido,
+	public Partido(int jornadaCampPartido, LocalDate fechaPartido,
 			int resultadoLocPartido, int resultadoVisPartido) {
 		super();
-		this.idPartido = idPartido;
-		this.codPartido = codPartido;
 		this.jornadaCampPartido = jornadaCampPartido;
 		this.fechaPartido = fechaPartido;
 		this.resultadoLocPartido = resultadoLocPartido;
@@ -38,17 +35,10 @@ public class Partido {
 		return idPartido;
 	}
 
-	public void setIdPartido(int idPartido) {
+	protected void setIdPartido(int idPartido) {
 		this.idPartido = idPartido;
 	}
-
-	public int getCodPartido() {
-		return codPartido;
-	}
-
-	public void setCodPartido(int codPartido) {
-		this.codPartido = codPartido;
-	}
+	//-----
 
 	public int getJornadaCampPartido() {
 		return jornadaCampPartido;
@@ -83,28 +73,28 @@ public class Partido {
 		this.cgotorneo = cgotorneo;
 	}
 
-	public Set<Categoria> getCgocategoria() {
-		return cgocategoria;
+	public Set<Categoria> getCgoCategoria() {
+		return cgoCategoria;
 	}
 
-	public void setCgocategoria(Set<Categoria> cgocategoria) {
-		this.cgocategoria = cgocategoria;
+	public void setCgoCategoria(Set<Categoria> cgoCategoria) {
+		this.cgoCategoria = cgoCategoria;
 	}
 
 	public Set<CanchaHora> getCgocanchaHora() {
-		return cgocanchaHora;
+		return cgoCanchaHora;
 	}
 
-	public void setCgocanchaHora(Set<CanchaHora> cgocanchaHora) {
-		this.cgocanchaHora = cgocanchaHora;
+	public void setCgoCanchaHora(Set<CanchaHora> cgoCanchaHora) {
+		this.cgoCanchaHora = cgoCanchaHora;
 	}
 
-	public Set<Equipo> getCgoequipoLocPArtido() {
-		return cgoequipoLocPArtido;
+	public Set<Equipo> getCgoEquipoLocPartido() {
+		return cgoEquipoLocPartido;
 	}
 
-	public void setCgoequipoLocPArtido(Set<Equipo> cgoequipoLocPArtido) {
-		this.cgoequipoLocPArtido = cgoequipoLocPArtido;
+	public void setCgoEquipoLocPartido(Set<Equipo> cgoEquipoLocPartido) {
+		this.cgoEquipoLocPartido = cgoEquipoLocPartido;
 	}
 
 	public int getResultadoLocPartido() {
@@ -115,12 +105,12 @@ public class Partido {
 		this.resultadoLocPartido = resultadoLocPartido;
 	}
 
-	public Set<Equipo> getCgoequipoVisPArtido() {
-		return cgoequipoVisPArtido;
+	public Set<Equipo> getCgoEquipoVisPartido() {
+		return cgoEquipoVisPartido;
 	}
 
-	public void setCgoequipoVisPArtido(Set<Equipo> cgoequipoVisPArtido) {
-		this.cgoequipoVisPArtido = cgoequipoVisPArtido;
+	public void setCgoEquipoVisPartido(Set<Equipo> cgoEquipoVisPartido) {
+		this.cgoEquipoVisPartido = cgoEquipoVisPartido;
 	}
 
 	public int getResultadoVisPartido() {
@@ -131,6 +121,13 @@ public class Partido {
 		this.resultadoVisPartido = resultadoVisPartido;
 	}
 	
+	public Set<Arbitro> getCgoArbitroPartido() {
+		return cgoArbitroPartido;
+	}
+
+	public void setCgoArbitroPartido(Set<Arbitro> cgoArbitroPartido) {
+		this.cgoArbitroPartido = cgoArbitroPartido;	
+	}	
 //-------------------------------------
 //tostring	
 //	@Override
@@ -144,10 +141,9 @@ public class Partido {
 
 	@Override
 	public String toString() {
-		return "Partido: [ " + idPartido + "  Cod. Partido: " + codPartido + " - Jornada: " + jornadaCampPartido 
-				+ " -  Fecha del Partido:" + fechaPartido
-				+ " Resultado Local: ( " + resultadoLocPartido
-				+ " ) -  Resultado Visitante: ( " + resultadoVisPartido + ")";
+		return "Partido: [ " + idPartido + " ] - Jornada Nro.: " + jornadaCampPartido + " -  Fecha del Partido:" + fechaPartido
+				+ "      \nFResultado Local: ( " + resultadoLocPartido + " )"
+				+ "      \nFResultado Visitante: ( " + resultadoVisPartido + ")";
 	}	
 	
 	
