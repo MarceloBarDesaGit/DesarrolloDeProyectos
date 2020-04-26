@@ -8,6 +8,11 @@ public class Arbitro extends Persona {
 	private String nomreArbitro;     //    Juan
 	private String apellidoArbitro;  //    Quiroz
 	private int celuArbitro;         //    1150364587
+	//-----------------
+	private char controlArbitro;         // A        B  M
+	private LocalDate fechaCtrlArbitro;  // 26/04/20
+	private LocalDate fechaModifArbitro; // Fecha de Modificaión para Baja y Modificaciones	
+
 //-------------------------------------
 //Constructores
 
@@ -21,6 +26,10 @@ public class Arbitro extends Persona {
 		this.nomreArbitro = nomreArbitro;
 		this.apellidoArbitro = apellidoArbitro;
 		this.celuArbitro = celuArbitro;
+		// ----------
+		this.controlArbitro = 'A';
+		this.fechaCtrlArbitro = LocalDate.now();
+		this.fechaModifArbitro = LocalDate.now();
 	}
 //-------------------------------------
 //Getter y Setter
@@ -57,12 +66,55 @@ public class Arbitro extends Persona {
 		this.celuArbitro = celuArbitro;
 	}
 	
+	//--------- CONTROL ----------------
+	public char getControlArbitro() {
+		return controlArbitro;
+	}
+
+	public void setControlArbitro(char controlArbitro) {
+		this.controlArbitro = controlArbitro;
+	}
+
+	public LocalDate getFechaCtrlArbitro() {
+		return fechaCtrlArbitro;
+	}
+
+	public void setFechaCtrlArbitro(LocalDate fechaCtrlArbitro) {
+		this.fechaCtrlArbitro = fechaCtrlArbitro;
+	}
+
+	public LocalDate getFechaModifArbitro() {
+		return fechaModifArbitro;
+	}
+
+	public void setFechaModifArbitro(LocalDate fechaModifArbitro) {
+		this.fechaModifArbitro = fechaModifArbitro;
+	}
+	
 //-------------------------------------
 //tostring	
 	@Override
 	public String toString() {
+		String estadoArb = "";
+		switch (this.getControlArbitro()) {
+		case 'A':
+			estadoArb = "Agregado";
+			break;
+		case 'B':
+			estadoArb = "Eliminado";
+			break;
+		case 'M':
+			estadoArb = "Modificado";
+			break;
+		default:
+			break;
+		}		
 		return "Arbitro: " + super.toString() 
-		+ "      \nID: [ " + idArbitro + " ] Nombre y Apellido: " + nomreArbitro + " " + apellidoArbitro + " - Celular: " + celuArbitro;
+		+ "      \nID: [ " + idArbitro + " ] Nombre y Apellido: " + nomreArbitro + " " + apellidoArbitro + " - Celular: " + celuArbitro
+		+ "      \nEstado: " + estadoArb + " -  " + funciones.Funciones.traerFechaCorta(getFechaCtrlArbitro()) 
+		+ "      \nModificación de datos: "	+ funciones.Funciones.traerFechaCorta(getFechaModifArbitro());		
 	}
+	
+	
 //----------------
 }// Fin Arbitro

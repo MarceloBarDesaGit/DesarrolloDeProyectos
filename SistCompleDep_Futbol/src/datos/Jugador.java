@@ -4,33 +4,33 @@ import java.time.LocalDate;
 import java.util.Set;         // debo importar cuando uso Set<Equipo>
 
 public class Jugador extends Persona {
-	private int idJugador;          //PK con cod_____	    
-    private int golesJugador;
-    private int tarjAmaJugador;
-    private int tarjRojaJugador;
-	private Set<Equipo> cgoEquipo;  //FK   las FK son cgo_____ UaU
+	private int idJugador;               // PK  120   
+    private int golesJugador;            //     15
+    private int tarjAmaJugador;          //     3
+    private int tarjRojaJugador;         //     0
+	private Set<Equipo> cgoEquipo;       // FK  Relacion UaU
 	//-----------------
-	private char controlJugador;
-	private LocalDate fechaCtrlJugador;  // Solo para las Bajas
-	private LocalDate fechaModifJugador; // Fecha de Modificaión para Altas y Modificaciones
+	private char controlJugador;         //     A
+	private LocalDate fechaCtrlJugador;  //     19/04/20 Solo para las Altas
+	private LocalDate fechaModifJugador; //     -        Fecha de Modificaión para Bajas y Modificaciones
 
 //-------------------------------------
 //Constructores
 
 	public Jugador() {}
 	
-public Jugador(String dni, String nombre, String apellido, LocalDate fechaNacimiento,
-		LocalDate fechaDeAlta, int edad, String username, String password, 
-		int golesJugador, int tarjAmaJugador, int tarjRojaJugador,
-		char controlJugador, LocalDate fechaCtrlJugador, LocalDate fechaModifJugador) {
-	super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
+	public Jugador(String dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
+			int edad, String username, String password, 
+			int golesJugador, int tarjAmaJugador, int tarjRojaJugador, char controlJugador, LocalDate fechaCtrlJugador, 
+			LocalDate fechaModifJugador) {
+		super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
 		this.golesJugador = golesJugador;
 		this.tarjAmaJugador = tarjAmaJugador;
 		this.tarjRojaJugador = tarjRojaJugador;
 		// ----------
 		this.controlJugador = 'A';
 		this.fechaCtrlJugador = LocalDate.now();
-		this.fechaModifJugador = LocalDate.now();		
+		this.fechaModifJugador = LocalDate.now();
 	}
 
 //-------------------------------------
