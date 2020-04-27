@@ -3,8 +3,8 @@ package datos;
 import java.time.LocalDate;
 
 public class Persona {
-	private int idPersona;               //PK 1354
-	private String dni;                  //   12345678
+	private int idPersona;             //PK 1354
+	private long dni;                    // 12345678
 	private String nombre;               // Marcelo
 	private String apellido;             // Barbieri
 	private LocalDate fechaNacimiento;   // 25/04/63
@@ -17,7 +17,7 @@ public class Persona {
 //Constructores	
 	public Persona() {}
 	
-	public Persona(String dni, String nombre, String apellido, LocalDate fechaNacimiento,
+	public Persona(long dni, String nombre, String apellido, LocalDate fechaNacimiento,
 			LocalDate fechaDeAlta, int edad, String username, String password) {
 		super();
 		this.dni = dni;
@@ -39,10 +39,10 @@ public class Persona {
 		this.idPersona = idPersona;
 	}
 	//-----------
-	public String getDni() {
+	public long getDni() {
 		return dni;
 	}
-	public void setDni(String dni) {
+	public void setDni(long dni) {
 		this.dni = dni;
 	}
 	public String getNombre() {
@@ -93,9 +93,9 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		return "Persona [idPersona=" + idPersona + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", fechaNacimiento=" + fechaNacimiento + ", fechaDeAlta=" + fechaDeAlta + ", edad=" + edad
-				+ ", username=" + username + ", password=" + password + "]";
+		return "Persona:  ID[ " + idPersona + " ] DNI: " + dni + " Nombre y Apellido: " + nombre + " " + apellido 
+				+ ", Fecha de Nacimiento:" + fechaNacimiento + " -  Edad: " + edad
+				+ "      \nFecha de Alta:" + fechaDeAlta + " - Username: " + username + " - Password: " + password;
 	}
 	
 	

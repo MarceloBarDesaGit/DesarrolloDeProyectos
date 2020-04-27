@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import funciones.Funciones;
 
 public class Cliente {
-	private long idCliente;
+	private int idCliente;
 	private String apellido;
 	private String nombre;
-	private int dni;
+	private long dni;
 	private LocalDate fechaDeNacimiento ;
 	private boolean baja;
 
@@ -18,7 +18,7 @@ public class Cliente {
 	public Cliente() {}  // SIEMPRE HAY que implementar el contructor VACIO
 
 	// IMPORTANTE:  NUNCA VA EL  id  --> En el constructor por ser autoincrementable
-	public Cliente(String apellido, String nombre, int dni, LocalDate fechaDeNacimiento) { 
+	public Cliente(String apellido, String nombre, long dni, LocalDate fechaDeNacimiento) { 
 		super();
 		this.apellido = apellido;
 		this.nombre = nombre;
@@ -29,12 +29,12 @@ public class Cliente {
 	
 //-------------------------------------
 //Getter y Setter
-	public long getIdCliente() {
+	public int getIdCliente() {
 		return idCliente;
 	}
 
  // SIEMPRE VA protected, el ID ----> para que NO SEA modificado
-	protected void setIdCliente(long idCliente) {
+	protected void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
 
@@ -54,11 +54,11 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public int getDni() {
+	public long getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(long dni) {
 		this.dni = dni;
 	}
 

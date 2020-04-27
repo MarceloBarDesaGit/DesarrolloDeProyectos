@@ -19,7 +19,7 @@ public class Jugador extends Persona {
 
 	public Jugador() {}
 	
-	public Jugador(String dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
+	public Jugador(long dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
 			int edad, String username, String password, 
 			int golesJugador, int tarjAmaJugador, int tarjRojaJugador, char controlJugador, LocalDate fechaCtrlJugador, 
 			LocalDate fechaModifJugador) {

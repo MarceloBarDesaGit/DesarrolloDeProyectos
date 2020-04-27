@@ -19,7 +19,7 @@ public class Arbitro extends Persona {
 	public Arbitro() {
 	}
 
-	public Arbitro(String dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
+	public Arbitro(long dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
 			int edad, String username, String password, 
 			String nomreArbitro, String apellidoArbitro, int celuArbitro) {
 		super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
