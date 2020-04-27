@@ -12,7 +12,6 @@ public class Jugador extends Persona {
 	//-----------------
 	private char controlJugador;         //     A
 	private LocalDate fechaCtrlJugador;  //     19/04/20 Solo para las Altas
-	private LocalDate fechaModifJugador; //     -        Fecha de Modificaión para Bajas y Modificaciones
 
 //-------------------------------------
 //Constructores
@@ -21,16 +20,14 @@ public class Jugador extends Persona {
 	
 	public Jugador(long dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
 			int edad, String username, String password, 
-			int golesJugador, int tarjAmaJugador, int tarjRojaJugador, char controlJugador, LocalDate fechaCtrlJugador, 
-			LocalDate fechaModifJugador) {
+			int golesJugador, int tarjAmaJugador, int tarjRojaJugador, char controlJugador, LocalDate fechaCtrlJugador) {
 		super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
 		this.golesJugador = golesJugador;
 		this.tarjAmaJugador = tarjAmaJugador;
 		this.tarjRojaJugador = tarjRojaJugador;
-		// ----------
+	 //----------
 		this.controlJugador = 'A';
 		this.fechaCtrlJugador = LocalDate.now();
-		this.fechaModifJugador = LocalDate.now();
 	}
 
 //-------------------------------------
@@ -75,8 +72,8 @@ public class Jugador extends Persona {
 	public void setCgoEquipo(Set<Equipo> cgoEquipo) {
 		this.cgoEquipo = cgoEquipo;
 	}
-	
-//--------- CONTROL ----------------
+
+ //--------- CONTROL ----------------
 	public char getControlJugador() {
 		return controlJugador;
 	}
@@ -92,15 +89,7 @@ public class Jugador extends Persona {
 	public void setFechaCtrlJugador(LocalDate fechaCtrlJugador) {
 		this.fechaCtrlJugador = fechaCtrlJugador;
 	}
-
-	public LocalDate getFechaModifJugador() {
-		return fechaModifJugador;
-	}
-
-	public void setFechaModifJugador(LocalDate fechaModifJugador) {
-		this.fechaModifJugador = fechaModifJugador;
-	}
-
+	
 //-------------------------------------
 //tostring	
 	@Override
@@ -119,11 +108,11 @@ public class Jugador extends Persona {
 		default:
 			break;
 		}
-		return "Jugador: " + super.toString() + "      \nID: [ " + idJugador + " ]"
-				+ "      \nGoles: " + golesJugador + ", Tarjetas Amarillas: " + tarjAmaJugador + " Tarjetas Rojas: "
-				+ tarjRojaJugador + "      \nNúmero de Equipo: " + cgoEquipo + "      \nEstado: " + estadoJug + " -  "
-				+ funciones.Funciones.traerFechaCorta(getFechaCtrlJugador()) + ", Modificación de datos: "
-				+ funciones.Funciones.traerFechaCorta(getFechaModifJugador());
+		return "Jugador: " + super.toString() 
+				+ "      \nID: [ " + idJugador + " ]"
+				+ " Goles: " + golesJugador + ", Tarjetas Amarillas: " + tarjAmaJugador + " Tarjetas Rojas: "
+				+ tarjRojaJugador + " Número de Equipo: " + cgoEquipo
+				+ "      \nEstado: " + estadoJug + " -  " + funciones.Funciones.traerFechaCorta(getFechaCtrlJugador());	
 	}
 
 	

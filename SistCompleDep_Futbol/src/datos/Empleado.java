@@ -1,5 +1,6 @@
 package datos;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 public class Empleado extends Persona {
@@ -7,15 +8,22 @@ public class Empleado extends Persona {
 	private long legajo;          //     100
 	private float sueldoBase;    //     300000
 	private Set<Rol> cgoRol;    // FK   1  Contadora / AdmSistemas / AdmCobranza / Canchero / BuffetChef / buffetVta1 / BuffetVta2
-	
+	//-----------------
+	private char controlEmpleado;         // A  B  M
+	private LocalDate fechaCtrlEmpleado;  // 26/04/20
 //-------------------------------------
 //Constructores
 	public Empleado() {}
 
-	public Empleado(int legajo, float sueldoBase) {
-		super();
+	public Empleado(long dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
+			int edad, String username, String password,
+			int legajo, float sueldoBase, char controlEmpleado, LocalDate fechaCtrlEmpleado) {
+		super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
 		this.legajo = legajo;
 		this.sueldoBase = sueldoBase;
+		// ----------
+		this.controlEmpleado = 'A';
+		this.fechaCtrlEmpleado = LocalDate.now();
 	}
 	
 //-------------------------------------
@@ -52,22 +60,47 @@ public class Empleado extends Persona {
 	public void setCgoRol(Set<Rol> cgoRol) {
 		this.cgoRol = cgoRol;
 	}	
-//-------------------------------------
-//tostring	
+	
+    //--------- CONTROL ----------------	
+	public char getControlEmpleado() {
+		return controlEmpleado;
+	}
 
-	@Override
-	public String toString() {
-		return "Empleado: "  + super.toString() 
-		+ "      \nID [ " + idEmpleado + " ]  - Legajo: " + legajo + ", Sueldo: " + sueldoBase;
+	public void setControlEmpleado(char controlEmpleado) {
+		this.controlEmpleado = controlEmpleado;
+	}
+
+	public LocalDate getFechaCtrlEmpleado() {
+		return fechaCtrlEmpleado;
+	}
+
+	public void setFechaCtrlEmpleado(LocalDate fechaCtrlEmpleado) {
+		this.fechaCtrlEmpleado = fechaCtrlEmpleado;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+//-------------------------------------
+//tostring	
+	@Override
+	public String toString() {
+		String estadoEmple = "";
+		switch (this.getControlEmpleado()) {
+		case 'A':
+			estadoEmple = "Agregado";
+			break;
+		case 'B':
+			estadoEmple = "Eliminado";
+			break;
+		case 'M':
+			estadoEmple = "Modificado";
+			break;
+		default:
+			break;
+		}
+		return "Empleado: "  + super.toString() 
+		+ "      \nID [ " + idEmpleado + " ]  - Legajo: " + legajo + ", Sueldo: " + sueldoBase
+		+ "      \nEstado: " + estadoEmple + " -  " + funciones.Funciones.traerFechaCorta(getFechaCtrlEmpleado());	
+	}
+		
 	
 //----------------	
 }//Fin Empleado

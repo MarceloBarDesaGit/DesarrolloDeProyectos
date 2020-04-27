@@ -8,11 +8,10 @@ public class Persona {
 	private String nombre;               // Marcelo
 	private String apellido;             // Barbieri
 	private LocalDate fechaNacimiento;   // 25/04/63
-	private LocalDate fechaDeAlta;       // 26/04/20
+	private LocalDate fechaDeAlta;       // 19/04/20 
     private int edad;                    // 56
 	private String username;             // MarceloBar  
 	private String password;             // 1234MEB
-
 //-------------------------------------
 //Constructores	
 	public Persona() {}
@@ -87,20 +86,18 @@ public class Persona {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 //-------------------------------------
 //tostring
-
 	@Override
 	public String toString() {
+
 		return "Persona:  ID[ " + idPersona + " ] DNI: " + dni + " Nombre y Apellido: " + nombre + " " + apellido 
-				+ ", Fecha de Nacimiento:" + fechaNacimiento + " -  Edad: " + edad
-				+ "      \nFecha de Alta:" + fechaDeAlta + " - Username: " + username + " - Password: " + password;
-	}
+				+ ", Fecha de Nacimiento:" + funciones.Funciones.traerFechaCorta(fechaNacimiento) + " -  Edad: " + edad 
+				+ "      \nFecha de Alta:" + funciones.Funciones.traerFechaCorta(fechaDeAlta)
+				+ "      \nUsername: " + username + " - Password: " + password;
+		}	
 	
-	
-	
-	
-	
+
 //-----------------
 }//Fin Persona
