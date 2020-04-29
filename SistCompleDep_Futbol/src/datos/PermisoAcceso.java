@@ -2,16 +2,16 @@ package datos;
 
 public class PermisoAcceso {
 	private int idPermisoAcceso;
-	private String descripcion;
+	private String descripcionPAcceso;
 	
 	public PermisoAcceso() {
 		
 	}
 
-	public PermisoAcceso(int idPermisoAcceso, String descripcion) {
+	public PermisoAcceso(int idPermisoAcceso, String descripcionPAcceso) {
 		super();
 		this.idPermisoAcceso = idPermisoAcceso;
-		this.descripcion = descripcion;
+		this.descripcionPAcceso = descripcionPAcceso;
 	}
 
 	public int getIdPermisoAcceso() {
@@ -22,12 +22,12 @@ public class PermisoAcceso {
 		this.idPermisoAcceso = idPermisoAcceso;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescripcionPAcceso() {
+		return descripcionPAcceso;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcionPAcceso(String descripcionPAcceso) {
+		this.descripcionPAcceso = descripcionPAcceso;
 	}
 	
 	

@@ -2,14 +2,14 @@ package datos;
 
 public class Periodo {
 	private int idPeriodo;          // PK
-	private String DetallePeriodo;  //   Mensual / Bimestral / Cuatrimestral / Semestral / Anual / Simple Eliminación
+	private String detallePeriodo;  //   Mensual / Bimestral / Cuatrimestral / Semestral / Anual / Simple Eliminación
 	
 //-------------------------------------
 //Constructores
 	public Periodo() {}
 	public Periodo(String detallePeriodo) {
 		super();
-		DetallePeriodo = detallePeriodo;
+		this.detallePeriodo = detallePeriodo;
 	}
 	//-------------------------------------
 	//Getter y Setter
@@ -21,17 +21,17 @@ public class Periodo {
 	}
 	//-----
 	public String getDetallePeriodo() {
-		return DetallePeriodo;
+		return detallePeriodo;
 	}
 	public void setDetallePeriodo(String detallePeriodo) {
-		DetallePeriodo = detallePeriodo;
+		detallePeriodo = detallePeriodo;
 	}
 
 //-------------------------------------
 //tostring
 	@Override
 	public String toString() {
-		return "Periodo: ID [ " + idPeriodo + " ] Periodo: " + DetallePeriodo;
+		return "Periodo: ID [ " + idPeriodo + " ] Periodo: " + detallePeriodo;
 	}
 	
 //---------------------	

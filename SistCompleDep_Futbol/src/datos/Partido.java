@@ -16,6 +16,7 @@ public class Partido {
 	private Set<Equipo> cgoEquipoVisPartido; // Relación UaU    Equipo BBB
 	private int resultadoVisPartido;         //                 1
 	private Set<Arbitro> cgoArbitroPartido;  // Relación UaU    40 (Juan Quiroz)
+	private Set<Sancion> cgoSanciones;       // 1  Roja directa por emppjon al arbitro por parte del jugador del equipoLoc, partido indirigible. suspendo a los 40m 2T
 //-------------------------------------
 //Constructores
 	public Partido() {}
@@ -80,11 +81,9 @@ public class Partido {
 	public void setCgoCategoria(Set<Categoria> cgoCategoria) {
 		this.cgoCategoria = cgoCategoria;
 	}
-
-	public Set<CanchaHora> getCgocanchaHora() {
+	public Set<CanchaHora> getCgoCanchaHora() {
 		return cgoCanchaHora;
 	}
-
 	public void setCgoCanchaHora(Set<CanchaHora> cgoCanchaHora) {
 		this.cgoCanchaHora = cgoCanchaHora;
 	}
@@ -128,6 +127,15 @@ public class Partido {
 	public void setCgoArbitroPartido(Set<Arbitro> cgoArbitroPartido) {
 		this.cgoArbitroPartido = cgoArbitroPartido;	
 	}	
+
+	public Set<Sancion> getCgoSanciones() {
+		return cgoSanciones;
+	}
+
+	public void setCgoSanciones(Set<Sancion> cgoSanciones) {
+		this.cgoSanciones = cgoSanciones;
+	}
+
 //-------------------------------------
 //tostring	
 //	@Override

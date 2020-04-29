@@ -4,8 +4,9 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-//--------
+
 import datos.Zona;
+//--------
 
 public class ZonaDao {
 	private static Session session;
@@ -25,92 +26,78 @@ public class ZonaDao {
 //-------------------------------------------------------
 //   Agregar-Eliminar-Modificar-Traer - List de Contacto
 //-------------------------------------------------------
-	public int agregar(Zona objeto) {
-		int id = 0;
-		try {
-			iniciaOperacion();  // Se abre la conexión con la session a la ND
-			id = Integer.parseInt(session.save(objeto).toString());
+	// AGREGAR
+		public int agregar(Zona objeto) {
+			int id = 0;
+			try {
+				iniciaOperacion();  
+				id = Integer.parseInt(session.save(objeto).toString());
+				tx.commit();
+			} catch (HibernateException he) {
+				manejaExcepcion(he);
+				throw he;
+			} finally {
+				session.close();
+			}
+			return id;
+		}
 		
-			//--Control del nuevo Estado
-			// para la tabla de Productos que me pide el estado.
-			// Estafo = "A"
-			//FechaCtrl=xx/xx/xx
-			//FechaModf=xx/xx/xx
-			
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();   // Se cierra la Transaccion con la conexión 
+	// ACTUALIZAR
+		public void actualizar(Zona objeto) throws HibernateException {
+			try {
+				iniciaOperacion();
+				session.update(objeto);
+				tx.commit();
+			} catch (HibernateException he) {
+				manejaExcepcion(he);
+				throw he;
+			} finally {
+				session.close();
+			}
 		}
-		return id;
-	}
 
-	public void actualizar(Zona objeto) throws HibernateException {
-		try {
-			iniciaOperacion();
-			session.update(objeto);
+	// ELIMINAR  
+	   // Físico (sin Dependencia)
+		public void eliminar(Zona objeto) throws HibernateException {
+			try {
+				iniciaOperacion();
+				session.delete(objeto);
+				tx.commit();
+			} catch (HibernateException he) {
+				manejaExcepcion(he);
+				throw he;
+			} finally {
+				session.close();
+			}
+		}
 		
+		// Borrado Logico
+		public void Borrar(Zona objeto) throws HibernateException {
+			try {
+				iniciaOperacion();
 			//--Control del nuevo Estado
-			// para la tabla de Productos que me pide el estado.
-			// Estafo = "M"
-			//FechaCtrl=xx/xx/xx
-			//FechaModf=xx/xx/xx
-			
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
+				// para la tabla de Zona que me pide el estado.
+				// Estafo = "A"
+				//FechaCtrl=xx/xx/xx
+				//FechaModf=xx/xx/xx
+				tx.commit();
+			} catch (HibernateException he) {
+				manejaExcepcion(he);
+				throw he;
+			} finally {
+				session.close();
+			}
 		}
-	}
-
-	// Borrado Fisico  - BUSCAR SI EXISTEN LAS DEPENDENCIAS
-	public void eliminar(Zona objeto) throws HibernateException {
-		try {
-			iniciaOperacion();
-			session.delete(objeto);
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
-		}
-	}
-	
-	// Borrado Logico
-	public void Borrar(Zona objeto) throws HibernateException {
-		try {
-			iniciaOperacion();
-		//--Control del nuevo Estado
-			// para la tabla de Zona que me pide el estado.
-			// Estafo = "A"
-			//FechaCtrl=xx/xx/xx
-			//FechaModf=xx/xx/xx
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
-		}
-	}
-	
-//------------------------------------------------------
-/*
-TIPOS DE LISTADOS
-traer idZona	         uniqueResult()
-	  nombreZona       uniqueResult()
-    //--------  
-      traer()            list()   traer todos los Zonas	
-*/
-	
-//Cuando se debe traer el ID de cualquier Tabla...
-//      SE DE DEBE USAR UN session.Get(...) ---> SIEMPRE 
-	public Zona traer(long idZona) throws HibernateException {
+		
+//---------------------------------------
+// TRAER (varios)
+//--------------------------------------- 
+// ZONA
+//			traerZona(long idZona)  		 uniqueResult()
+//			traerZona(String nombre)         uniqueResult()
+	//--------------------------------------
+		// Cuando se pide traer el ID se usa SIEMPRE --> session.get(...)
+	public Zona traerZona(long idZona) throws HibernateException {
 		Zona objeto = null;
 		try {
 			iniciaOperacion();
@@ -122,21 +109,27 @@ traer idZona	         uniqueResult()
 		return objeto;
 	}
 
-	public Zona traer(String nombre) throws HibernateException {
+	public Zona traerZona(String nombre) throws HibernateException {
 		Zona objeto = null;
 		try {
 			iniciaOperacion();
 		  //Casteo del tipo Zona
-			objeto = (Zona) session.createQuery("from Zona z where z.nombreZona=" + nombre).uniqueResult();
+	        String query = "from Zona z where z.nombreZona=" + nombre;
+	        objeto = (Zona) session.createQuery(query).uniqueResult();
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 	
-//---------Listados Generales -----------------
+//-------------------------------------------------------------
+//	List<tabla> traerTabla()  
+//-------------------------------------------------------------	
+// 	ZONA
+//			List<Zona> traerZona()	--> Listar TODAs las Personas
+//-------------------------------------------------------------	
 	@SuppressWarnings("unchecked")
-	public List<Zona> traer() throws HibernateException {
+	public List<Zona> traerZona() throws HibernateException {
 		List<Zona> lista = null;
 		try {
 			iniciaOperacion();

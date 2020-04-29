@@ -5,25 +5,25 @@ import java.util.Set;
 
 public class Rol {
 	private int idRol;					 //PK  1
-	private String descripcion;          //    Contadora / AdmSistemas / AdmCobranza / Canchero / BuffetChef / buffetVta1 / BuffetVta2
-	private Set<PermisoAcceso> permisos; //    Control Total - Gestión Total -  Autorización - Autenticación - Creación - Búsqueda - Lectura - Escritura - Eliminar 
+	private String descripcionRol;          //    Contadora / AdmSistemas / AdmCobranza / Canchero / BuffetChef / buffetVta1 / BuffetVta2
+	private Set<PermisoAcceso> permisoRol; //    Control Total - Gestión Total -  Autorización - Autenticación - Creación - Búsqueda - Lectura - Escritura - Eliminar 
 	
 //-------------------------------------
 //Constructores	
 	public Rol() {}
 
-	public Rol(String descripcion) {
+	public Rol(String descripcionRol) {
 		super();
 		this.idRol = 0;
-		this.descripcion = descripcion;
-		this.permisos = new HashSet<PermisoAcceso>();
+		this.descripcionRol = descripcionRol;
+		this.permisoRol = new HashSet<PermisoAcceso>();
 	}
 
-	public Rol(String descripcion, Set<PermisoAcceso> permisos) {
+	public Rol(String descripcionRol, Set<PermisoAcceso> permisoRol) {
 		super();
 		this.idRol = 0;
-		this.descripcion = descripcion;
-		this.permisos = permisos;
+		this.descripcionRol = descripcionRol;
+		this.permisoRol = permisoRol;
 	}
 	
 //-------------------------------------
@@ -37,31 +37,31 @@ public class Rol {
 	}
 	//--------
 	
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescripcionRol() {
+		return descripcionRol;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcionRol(String descripcionRol) {
+		this.descripcionRol = descripcionRol;
 	}
 
 	public Set<PermisoAcceso> getPermisos() {
-		return permisos;
+		return permisoRol;
 	}
 
-	public void setPermisos(Set<PermisoAcceso> permisos) {
-		this.permisos = permisos;
+	public void setPermisoRol(Set<PermisoAcceso> permisoRol) {
+		this.permisoRol = permisoRol;
 	}
 	
-	public void agregarPermiso(PermisoAcceso pa) {
-		this.permisos.add(pa);
+	public void agregarPermisoRol(PermisoAcceso pa) {
+		this.permisoRol.add(pa);
 	}
 
 //-------------------------------------
 //tostring
 	@Override
 	public String toString() {
-		return "Rol: [ " + idRol + " ] - Descripcion: " + descripcion + " - Permisos: " + permisos;
+		return "Rol: [ " + idRol + " ] - Descripcion: " + descripcionRol + " - Permisos: " + permisoRol;
 	}
 	
 	

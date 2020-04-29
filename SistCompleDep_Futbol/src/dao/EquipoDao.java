@@ -26,39 +26,27 @@ public class EquipoDao {
 //-------------------------------------------------------
 //   Agregar-Eliminar-Modificar-Traer - List de Contacto
 //-------------------------------------------------------
+// AGREGAR
 	public int agregar(Equipo objeto) {
 		int id = 0;
 		try {
-			iniciaOperacion();  // Se abre la conexión con la session a la ND
+			iniciaOperacion();  
 			id = Integer.parseInt(session.save(objeto).toString());
-		
-			//--Control del nuevo Estado
-			// para la tabla de Productos que me pide el estado.
-			// Estafo = "A"
-			//FechaCtrl=xx/xx/xx
-			//FechaModf=xx/xx/xx
-			
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 			throw he;
 		} finally {
-			session.close();   // Se cierra la Transaccion con la conexión 
+			session.close();
 		}
 		return id;
 	}
-
+	
+// ACTUALIZAR
 	public void actualizar(Equipo objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
-		
-			//--Control del nuevo Estado
-			// para la tabla de Productos que me pide el estado.
-			// Estafo = "M"
-			//FechaCtrl=xx/xx/xx
-			//FechaModf=xx/xx/xx
-			
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
@@ -68,7 +56,8 @@ public class EquipoDao {
 		}
 	}
 
-	// Borrado Fisico  - BUSCAR SI EXISTEN LAS DEPENDENCIAS
+// ELIMINAR  
+   // Físico (sin Dependencia)
 	public void eliminar(Equipo objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
@@ -100,23 +89,15 @@ public class EquipoDao {
 		}
 	}
 	
-//------------------------------------------------------
-/*
-TIPOS DE LISTADOS
-traer idEquipo	         uniqueResult()
-	  nombreEquipo       uniqueResult()
-	  cgoZona            list()   traer toda una zona
-    //--------  
- 	// Variable "lista" GUARDA todo el recordSet de la tabla
-      traer()            list()   traer todos los equipos	
-      traerPorZonas      list()
-      traerPorNombres    list()
-      traerPorFechaAlta  list()
-*/
-	
-//Cuando se debe traer el ID de cualquier Tabla...
-//      SE DE DEBE USAR UN session.Get(...) ---> SIEMPRE 
-	public Equipo traer(long idEquipo) throws HibernateException {
+//---------------------------------------
+//	TRAER (varios)
+//--------------------------------------- 
+// EQUIPO
+//		traerEquipo(int idEquipo)   	   uniqueResult()
+//		traerEquipo(String nombreEquipo)   uniqueResult()
+//--------------------------------------
+	// Cuando se pide traer el ID se usa SIEMPRE --> session.get(...)
+	public Equipo traerEquipo(int idEquipo) throws HibernateException {
 		Equipo objeto = null;
 		try {
 			iniciaOperacion();
@@ -128,9 +109,9 @@ traer idEquipo	         uniqueResult()
 		return objeto;
 	}
 
-  //Cuando se debe traer una consulta por cualquier otro tipo de campo
-  //       que no sea el Id, SE DEBE HACER UNA HQL----> SIEMPRE
-	public Equipo traer(String nombre) throws HibernateException {
+    // Cuando se pide traer cualquier otro tipo de campo
+    //       SE DEBE HACER SIEMPRE ----> UNA HQL
+	public Equipo traerEquipo(String nombre) throws HibernateException {
 		Equipo objeto = null;
 		try {
 			iniciaOperacion();
@@ -142,26 +123,24 @@ traer idEquipo	         uniqueResult()
 		return objeto;
 	}
 	
-	public Equipo traer(int codigoZona) throws HibernateException {
-		Equipo objeto = null;
-		try {
-			iniciaOperacion();
-		//-------------	
-			//Casteo del tipo Equipo
-			objeto = (Equipo) session.createQuery("from Equipo e where e.cgoZona=" + codigoZona).list();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-	
-//---------Listados Generales -----------------
+//-------------------------------------------------------------
+//	List<tabla> traerTabla()  
+//-------------------------------------------------------------	
+// 	EQUIPO
+//			List<Equipo> traerEquipo()	--> Listar TODAs las Personas
+//			List<Equipo> traerEquipos(int zona)
+//			List<Equipo> traerEquipo(LocalDate fechaAlta)	
+//			List<Equipo> traerEquipoPorFechaAlta(LocalDate fechaAlta)	
+//			List<Equipo> traerEquipo(LocalDate fechaDesde, LocalDate fechaHasta, int zona)
+	//-------------------------------------------------------------	
 	@SuppressWarnings("unchecked")
-	public List<Equipo> traer() throws HibernateException {
+	public List<Equipo> traerEquipo() throws HibernateException {
 		List<Equipo> lista = null;
 		try {
 			iniciaOperacion();
-	        String query = "from Equipo e order by e.nombreEquipo asc";
+	        String query = "from Equipo e "
+	        		+ "order by "
+	        		+ "e.nombreEquipo asc";
 			lista = session.createQuery(query).list();
 		} finally {
 			session.close();
@@ -170,11 +149,15 @@ traer idEquipo	         uniqueResult()
 	}	
 
 	@SuppressWarnings("unchecked")
-	public List<Equipo> traerPorZonas() throws HibernateException {
+	public List<Equipo> traerEquipos(int zona) throws HibernateException {
 		List<Equipo> lista = null;
 		try {
 			iniciaOperacion();
-	        String query = "from Equipo e order by e.cgoZona asc e.nombreEquipo asc";
+	        String query = "from Equipo e "
+	        		+ "where e.cgoZona=" + zona 
+	        		+ "order by "
+	        		+ "e.cgoZona asc "
+	        		+ "e.nombreEquipo asc";
 			lista = session.createQuery(query).list();
 		} finally {
 			session.close();
@@ -183,30 +166,55 @@ traer idEquipo	         uniqueResult()
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Equipo> traerPorNombres(String nombre) throws HibernateException {
+	public List<Equipo> traerEquipo(LocalDate fechaAlta) throws HibernateException {
+		List<Equipo> lista = null;
+		try {
+			iniciaOperacion();
+	        String query = "from Equipo e "
+	        		+ "where e.FechaAltaEquipo=" + fechaAlta 
+	        		+ "order by "
+	        		+ "e.cgoZona asc "
+	        		+ "e.nombreEquipo asc";			
+			lista = session.createQuery(query).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}		
+	
+	@SuppressWarnings("unchecked")
+	public List<Equipo> traerEquipo(LocalDate fechaDesde, LocalDate fechaHasta) throws HibernateException {
 		List<Equipo> objeto = null;
 		try {
 			iniciaOperacion();
-	        String query = "from Equipo e where e.nombreEquipo like '%" + nombre + "%' order by e.nombreEquipo asc";
+			String query = "from Equipo e "
+					+ "where (e.FechaAltaEquipo >=" + fechaDesde + " and j.FechaAltaEquipo <=" + fechaHasta 
+					+ ") order by "
+					+ "e.cgoZona asc "
+					+ "e.nombreEquipo asc";
+			objeto = session.createQuery(query).list();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Equipo> traerEquipo(LocalDate fechaDesde, LocalDate fechaHasta, int zona) throws HibernateException {
+		List<Equipo> objeto = null;
+		try {
+			iniciaOperacion();
+			String query = "from Equipo e "
+					+ "where (e.FechaAltaEquipo >=" + fechaDesde + " and j.FechaAltaEquipo <=" + fechaHasta 
+					+ ") and (e.cgoZona=" + zona 
+					+ ") order by "
+					+ "e.cgoZona asc "
+					+ "e.nombreEquipo asc";
 			objeto = session.createQuery(query).list();
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}	
-	
-	@SuppressWarnings("unchecked")
-	public List<Equipo> traerPorFechaAlta(LocalDate fechaAlta) throws HibernateException {
-		List<Equipo> objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = session.createQuery("from Equipo e where e.FechaAltaEquipo=" + fechaAlta).list();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}		
-	
-	
 //-----------------	
 }//Fin EquipoDao
