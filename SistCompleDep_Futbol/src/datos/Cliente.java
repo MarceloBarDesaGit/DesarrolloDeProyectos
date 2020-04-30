@@ -2,29 +2,25 @@ package datos;
 
 import java.time.LocalDate;
 
-import funciones.Funciones;
-
-public class Cliente {
+public class Cliente extends Persona {
 	private int idCliente;
-	private String apellido;
-	private String nombre;
-	private long dni;
-	private LocalDate fechaDeNacimiento ;
-	private boolean baja;
-
-	
+	private String descripcionCliente;
+	//-----------------
+	private char controlCliente;         // A  B  M
+	private LocalDate fechaCtrlCliente;  // 26/04/20
 //-------------------------------------
 //Constructores
 	public Cliente() {}  // SIEMPRE HAY que implementar el contructor VACIO
 
 	// IMPORTANTE:  NUNCA VA EL  id  --> En el constructor por ser autoincrementable
-	public Cliente(String apellido, String nombre, long dni, LocalDate fechaDeNacimiento) { 
-		super();
-		this.apellido = apellido;
-		this.nombre = nombre;
-		this.dni = dni;
-		this.fechaDeNacimiento = fechaDeNacimiento;
-		this.baja = false;
+	public Cliente(long dni, String nombre, String apellido, LocalDate fechaNacimiento,
+			LocalDate fechaDeAlta, int edad, String username, String password,
+			String descripcionCliente, char controlCliente, LocalDate fechaCtrlCliente) { 
+		super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
+		this.descripcionCliente = descripcionCliente;
+		// ----------
+		this.controlCliente = 'A';
+		this.fechaCtrlCliente = LocalDate.now();
 	}
 	
 //-------------------------------------
@@ -37,53 +33,53 @@ public class Cliente {
 	protected void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
-
-	public String getApellido() {
-		return apellido;
+	//--------
+	
+	public String getDescripcionCliente() {
+		return descripcionCliente;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public long getDni() {
-		return dni;
-	}
-
-	public void setDni(long dni) {
-		this.dni = dni;
-	}
-
-	public LocalDate getFechaDeNacimiento() {
-		return fechaDeNacimiento;
-	}
-
-	public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
-		this.fechaDeNacimiento = fechaDeNacimiento;
-	}
-
-	public boolean isBaja() {
-		return baja;
-	}
-
-	public void setBaja(boolean baja) {
-		this.baja = baja;
+	public void setDescripcionClienteo(String descripcionCliente) {
+		this.descripcionCliente = descripcionCliente;
 	}
 	
+    //--------- CONTROL ----------------	
+	public char getControlCliente() {
+		return controlCliente;
+	}
+
+	public void setControlCliente(char controlCliente) {
+		this.controlCliente = controlCliente;
+	}
+
+	public LocalDate getFechaCtrlCliente() {
+		return fechaCtrlCliente;
+	}
+
+	public void setFechaCtrlCliente(LocalDate fechaCtrlCliente) {
+		this.fechaCtrlCliente = fechaCtrlCliente;
+	}	
 //-------------------------------------
 //tostring		
 	@Override
 	public String toString() {
-		return "Cliente [Id.: " + idCliente + " - Apellido= y Nombre: " + apellido + ", " + nombre + " - DNI: " + dni 
-				+ "  F.de Nacimiento: " + funciones.Funciones.traerFechaCorta(fechaDeNacimiento) + " - " + baja + "]";
+		String estadoClien = "";
+		switch (this.getControlCliente()) {
+		case 'A':
+			estadoClien = "Agregado";
+			break;
+		case 'B':
+			estadoClien = "Eliminado";
+			break;
+		case 'M':
+			estadoClien = "Modificado";
+			break;
+		default:
+			break;
+		}
+		return "Cliente [Id.: " + idCliente 
+			+ "      \nDescripción del Cliente: " + descripcionCliente
+			+ "      \nEstado: " + estadoClien + " -  " + funciones.Funciones.traerFechaCorta(getFechaCtrlCliente());	
 	}
 
 	

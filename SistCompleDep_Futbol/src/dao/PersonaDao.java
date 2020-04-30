@@ -49,12 +49,25 @@ public class PersonaDao {
 		tx.rollback();
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}	
-	
-//-------------------------------------------------------
-//  Agregar-Eliminar-Modificar-Traer - List de Contacto
+
 //-------------------------------------------------------		
 //   AGREGAR
 //-------------------------------------------------------	
+//	public int agregarPerona(Persona objeto) {
+//		int id = 0;
+//		try {
+//			iniciaOperacion();
+//			id = Integer.parseInt(session.save(objeto).toString());
+//			tx.commit();
+//		} catch (HibernateException he) {
+//			manejaExcepcion(he);
+//			throw he;
+//		} finally {
+//			session.close();
+//		}
+//		return id;
+//	}
+	
 	public int agregarCliente(Cliente objeto) {
 		int id = 0;
 		try {
@@ -85,7 +98,7 @@ public class PersonaDao {
 		return id;
 	}
 	
-	public int agregarJugador(Empleado objeto) {
+	public int agregarJugador(Jugador objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -100,7 +113,7 @@ public class PersonaDao {
 		return id;
 	}
 			
-	public int agregarArbitro(Empleado objeto) {
+	public int agregarArbitro(Arbitro objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -117,6 +130,19 @@ public class PersonaDao {
 //------------------------------------------------
 //	ACTUALIZAR
 //------------------------------------------------				
+//	public void actualizarPersona(Persona objeto) throws HibernateException {
+//		try {
+//			iniciaOperacion();
+//			session.update(objeto);
+//			tx.commit();
+//		} catch (HibernateException he) {
+//			manejaExcepcion(he);
+//			throw he;
+//		} finally {
+//			session.close();
+//		}
+//	}
+	
 	public void actualizarCliente(Cliente objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
@@ -169,8 +195,21 @@ public class PersonaDao {
 		}
 	}
 //------------------------------------------------
-//		ELIMINAR  (Físico sin Dependencia)
+//	ELIMINAR  (Físico sin Dependencia)
 //------------------------------------------------	
+//	public void eliminarPersona(Persona objeto) throws HibernateException {
+//		try {
+//			iniciaOperacion();
+//			session.delete(objeto);
+//			tx.commit();
+//		} catch (HibernateException he) {
+//			manejaExcepcion(he);
+//			throw he;
+//		} finally {
+//			session.close();
+//		}
+//	}
+	
 	public void eliminarCliente(Cliente objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
@@ -223,7 +262,7 @@ public class PersonaDao {
 		}
 	}
 //---------------------------------------
-//	TRAER (varios)
+//	TRAER 
 //--------------------------------------- 
 // PERSONA
 //	traerPersona(int idPersona)    uniqueResult()
@@ -312,7 +351,7 @@ public class PersonaDao {
 //-----------------------------------------------		
 // EMPLEADOS
 //		traerEmpleado(int idEmpleado) 
-//		traerEmpleado(String legajo) 
+//		traerEmpleado(long legajo) 
 //		traerEmpleado(String apellido)
 //------------------------------------------------
 	public Empleado traerEmpleado(int idEmpleado) throws HibernateException {
@@ -356,7 +395,7 @@ public class PersonaDao {
 //			traerJugador(int idJugador) 
 //			traerJugador(long dni) 
 //			traerJugador(String apellido)
-	//------------------------------------------------
+//------------------------------------------------
 		public Jugador traerJugador(int idJugador) throws HibernateException {
 			Jugador objeto = null;
 			try {
@@ -436,7 +475,7 @@ public class PersonaDao {
 	}	
 		
 //-------------------------------------------------------------
-//	List<tabla> traerTabla()  
+//	List<tabla> traerTabla()  -  LISTADOS  GENERRALES
 //-------------------------------------------------------------	
 // 	PERSONA
 //			List<Persona> traerPersona()	--> Listar TODAs las Personas
@@ -459,17 +498,17 @@ public class PersonaDao {
 //			List<Empleado> traerEmpleado()	--> Listar TODOs los Empleados
 //-------------------------------------------------------------		
 	@SuppressWarnings("unchecked")
-			public List<Empleado> traerEmpleado() throws HibernateException {
-				List<Empleado> lista = null;
-				try {
-					iniciaOperacion();
-					String query = "from Empleado e order by e.Apellido asc e.nombre asc";
-					lista = session.createQuery(query).list();
-				} finally {
-					session.close();
-				}
-				return lista;
-			}
+	public List<Empleado> traerEmpleado() throws HibernateException {
+		List<Empleado> lista = null;
+		try {
+			iniciaOperacion();
+			String query = "from Empleado e order by e.Apellido asc e.nombre asc";
+			lista = session.createQuery(query).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
 //-------------------------------------------------------------	
 //	JUGADOR
 //			List<Jugador> traerJugador()              ordenado por Equipo, apellido, nombre
@@ -590,8 +629,8 @@ public class PersonaDao {
 //----------------------------------------------------------------			
 //		CLIENTES			
 //			List<Cliente> traerCliente()	
-//			List<Cliente> traerCliente(boolean bajas)		
-						
+//			List<Cliente> traerCliente(char estado)		
+//-------------------------------------------------------------	
 	@SuppressWarnings("unchecked")
 	public List<Cliente> traerCliente() throws HibernateException {
 		List<Cliente> lista = null;
@@ -606,11 +645,11 @@ public class PersonaDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Cliente> traerCliente(boolean bajas) throws HibernateException {
+	public List<Cliente> traerCliente(char estado) throws HibernateException {
 		List<Cliente> objeto = null;
 		try {
 			iniciaOperacion();
-			String query = "from Cliente c where c.baja =" + bajas + "order by c.apellido asc c.nombre asc";
+			String query = "from Cliente c where c.controlCliente =" + estado + "order by c.apellido asc c.nombre asc";
 			objeto = session.createQuery(query).list();
 		} finally {
 			session.close();
