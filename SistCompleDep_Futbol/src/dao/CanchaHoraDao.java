@@ -6,6 +6,7 @@ package dao;
 	import org.hibernate.Transaction;
 	//--------
 	import datos.CanchaHora;
+import datos.Partido;
 
 	public class CanchaHoraDao {
 		private static Session session;
@@ -109,9 +110,11 @@ package dao;
 //-------------------------------------------------------------
 //	List<tabla> traerTabla()  
 //-------------------------------------------------------------
-//	 	CanchaHora
-//				List<CanchaHora> traerCanchaHora()	--> Listar TODAs las Personas
-//				List<CanchaHora> traerCanchaHoras(String dia)
+//	CanchaHora
+//			List<CanchaHora> traerCanchaHora()	--> Listar TODAs las Personas
+//			List<CanchaHora> traerCanchaHoras(String dia)
+//	--> para el Eliminar
+//			List<CanchaHora> traerCanchaHoraPorPartido(int partido) -
 // -------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public List<CanchaHora> traerCanchaHora() throws HibernateException {
@@ -147,6 +150,23 @@ package dao;
 		}
 		return lista;
 	}
+	
+	// Para el Eliminar
+	// ------------------------
+	public List<CanchaHora> traerCanchaHoraPorPartido(int partido) throws HibernateException {
+		List<CanchaHora> Partidos = null;
+		try {
+			iniciaOperacion();
+			String query = "from CanchaHora e where e.cgoPartido = " + partido;
+			Partidos = session.createQuery(query).list();
+
+		} finally {
+			session.close();
+		}
+		return Partidos;
+	}
+	
+	
 	
 //-----------------	
 }//Fin CanchaHoraDao

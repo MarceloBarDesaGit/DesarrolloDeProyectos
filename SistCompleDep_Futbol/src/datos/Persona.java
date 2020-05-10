@@ -10,8 +10,9 @@ public class Persona {
 	private LocalDate fechaNacimiento;   // 25/04/63
 	private LocalDate fechaDeAlta;       // 19/04/20 
     private int edad;                    // 56
+//    private String fotoJugador; (AGREGARLO)			 // c:\SistCompeDep\Images\BarbieriMarcelo.jpg
 	private String username;             // MarceloBar  
-	private String password;             // 1234MEB
+	private String password;             // 1234MEB (4números y 3Letras)
 //-------------------------------------
 //Constructores	
 	public Persona() {}

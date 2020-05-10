@@ -7,6 +7,7 @@ package dao;
 	import org.hibernate.Transaction;
 	//--------
 	import datos.Periodo;
+import datos.Temporada;
 
 	public class PeriodoDao {
 		private static Session session;
@@ -109,12 +110,11 @@ package dao;
 //-------------------------------------------------------------
 //	List<tabla> traerTabla()  
 //-------------------------------------------------------------
-//	 	Periodo
-//				List<Periodo> traerPeriodo()	--> Listar TODAs las Personas
-//				List<Periodo> traerPeriodos(String sponsor)
-//				List<Periodo> traerPeriodo(LocalDate fechaAlta)	
-//				List<Periodo> traerPeriodo(LocalDate fechaDesde, LocalDate fechaHasta, String sponsor)
-	// -------------------------------------------------------------
+//	PERIODO
+//			List<Periodo> traerPeriodo()	--> Listar TODAs las Personas
+//	 --> para Elimiinar con Dependencias
+//  		List<Periodo> traerPeriodoPorCampeonato(int campeonato) 
+// -------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public List<Periodo> traerPeriodo() throws HibernateException {
 		List<Periodo> lista = null;
@@ -130,59 +130,21 @@ package dao;
 		}
 		return lista;
 	}
-
-	@SuppressWarnings("unchecked")
-	public List<Periodo> traerPeriodos(String sponsor) throws HibernateException {
-		List<Periodo> lista = null;
+	
+// Para el Eliminar
+//------------------------
+	public List<Periodo> traerPeriodoPorCampeonato(int campeonato) throws HibernateException {
+		List<Periodo> Periodos = null;
 		try {
 			iniciaOperacion();
-			String query = "from Periodo e "
-					+ "where e.sponsorPeriodo=" + sponsor
-					+ "order by "
-					+ "e.fechaPeriodo asc "
-					+ "e.sponsorPeriodo asc";
-			lista = session.createQuery(query).list();
+			String query = "from Periodo p where p.cgoCampeonato = " + campeonato;
+			Periodos = session.createQuery(query).list();
 		} finally {
 			session.close();
 		}
-		return lista;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Periodo> traerPeriodo(LocalDate fechaDesde, LocalDate fechaHasta) throws HibernateException {
-		List<Periodo> objeto = null;
-		try {
-			iniciaOperacion();
-			String query = "from Periodo e "
-					+ "where (e.fechaPeriodo >=" + fechaDesde + " and j.fechaPeriodo <=" + fechaHasta 
-					+ "order by "
-					+ "e.fechaPeriodo asc "
-					+ "e.sponsorPeriodo asc";
-			objeto = session.createQuery(query).list();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Periodo> traerPeriodo(LocalDate fechaDesde, LocalDate fechaHasta, String sponsor)
-			throws HibernateException {
-		List<Periodo> objeto = null;
-		try {
-			iniciaOperacion();
-			String query = "from Periodo e "
-					+ "where (e.fechaPeriodo >=" + fechaDesde + " and j.fechaPeriodo <=" + fechaHasta 
-					+ ") and (e.sponsorPeriodo=" + sponsor 
-					+ "order by "
-					+ "e.fechaPeriodo asc "
-					+ "e.sponsorPeriodo asc";
-			objeto = session.createQuery(query).list();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
+		return Periodos;
+	}	
+	
 //-----------------	
 }//Fin PeriodoDao
 

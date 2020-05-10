@@ -4,7 +4,9 @@ package dao;
 	import org.hibernate.HibernateException;
 	import org.hibernate.Session;
 	import org.hibernate.Transaction;
-	//--------
+
+import datos.Equipo;
+//--------
 	import datos.Temporada;
 
 	public class TemporadaDao {
@@ -110,8 +112,9 @@ package dao;
 //-------------------------------------------------------------
 //	 TEMPORADA
 //				List<Temporada> traerTemporada()	--> Listar TODAs las Personas
-//				List<Temporada> traerTemporadas(String temporada)
-// -------------------------------------------------------------
+//				List<Temporada> traerTemporadas(String temporada) 
+//				List<Temporada> traerTemporadaPorCampeonato(int campeonato) --> para Elimiinar con Dependencias
+	// -------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public List<Temporada> traerTemporada() throws HibernateException {
 		List<Temporada> lista = null;
@@ -145,6 +148,22 @@ package dao;
 		return lista;
 	}
 
+	// Para el Eliminar
+	//------------------------
+	public List<Temporada> traerTemporadaPorCampeonato(int campeonato) throws HibernateException {
+		List<Temporada> Temporadas = null;
+		try {
+			iniciaOperacion();
+			String query = "from Temporada t where t.cgoCampeonato = " + campeonato;
+			Temporadas = session.createQuery(query).list();
+		} finally {
+			session.close();
+		}
+		return Temporadas;
+	}	
+	
+	
+	
 //-----------------	
 }//Fin TemporadaDao
 

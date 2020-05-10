@@ -127,6 +127,29 @@ package dao;
 		return lista;
 	}
 
+//******************************************
+	@SuppressWarnings("unchecked")
+	//Se traen TODOS los PermisosAcceso con ese ID que haya en los Roles 
+//				y arma una Lista, que puede servir para eliminar dependencias
+//				o hacer algun tipo de calculo. (es correcta la interpretacion ?)
+	
+	// La tabla PermisoAcceso tiene un atributo: Rol cgoRolPAcceso
+
+	public List<PermisoAcceso> traerPermisosPorRol(int RolPAcceso) {
+		List<PermisoAcceso> permisos = null;
+		try {
+			iniciaOperacion();
+			//                  como se arma el iiner si el campo es de PermisoAcceo ?
+			String query = "from PermisoAcceso pa inner join fetch pa.cgoRolPAcceso where pa.cgoRolPAcceso = "	+ RolPAcceso;
+			permisos = session.createQuery(query).list();
+		} finally {
+			session.close();
+		}
+		return permisos;
+	}
+//******************************************	
+	
+	
 //-----------------	
 }//Fin PermisoAccesoDao
 

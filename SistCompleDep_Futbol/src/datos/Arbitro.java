@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Arbitro extends Persona {
 	private int idArbitro;           // PK 40
 	private long celuArbitro;        //    1150364587
-	//-----------------
+ 	//-----------------
 	private char controlArbitro;         // A  B  M
 	private LocalDate fechaCtrlArbitro;  // 26/04/20
 
@@ -59,8 +59,8 @@ public class Arbitro extends Persona {
 	public void setFechaCtrlArbitro(LocalDate fechaCtrlArbitro) {
 		this.fechaCtrlArbitro = fechaCtrlArbitro;
 	}
-	
-//-------------------------------------
+
+	//-------------------------------------
 //tostring	
 	@Override
 	public String toString() {

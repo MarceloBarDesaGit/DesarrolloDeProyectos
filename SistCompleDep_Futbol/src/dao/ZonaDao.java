@@ -126,7 +126,10 @@ public class ZonaDao {
 //	List<tabla> traerTabla()  
 //-------------------------------------------------------------	
 // 	ZONA
-//			List<Zona> traerZona()	--> Listar TODAs las Personas
+//		List<Zona> traerZona()	--> Listar TODAs las Personas
+//	 --> para Elimiinar con Dependencias
+//		List<Zona> traerZonaPorCategoria(int categoria)	
+//  	List<Zona> traerZonaPorCampeonato(int Campeonato)
 //-------------------------------------------------------------	
 	@SuppressWarnings("unchecked")
 	public List<Zona> traerZona() throws HibernateException {
@@ -140,7 +143,36 @@ public class ZonaDao {
 		}
 		return lista;
 	}	
+		
+	// Para el Eliminar
+	//------------------------
+	public List<Zona> traerZonaPorCampeonato(int Campeonato) throws HibernateException {
+		List<Zona> zo = null;
+		try {
+			iniciaOperacion();
+			String query = "from Zona z where z.cgoCampeonato = " + Campeonato;
+			zo = session.createQuery(query).list();
 
+		} finally {
+			session.close();
+		}
+		return zo;
+	}
+	
+// Para el Eliminar
+//------------------------
+		public List<Zona> traerZonaPorCategoria(int categoria) throws HibernateException {
+			List<Zona> zo = null;
+			try {
+				iniciaOperacion();
+				String query = "from Zona z where z.cgoCategoria = " + categoria;
+				zo = session.createQuery(query).list();
+			} finally {
+				session.close();
+			}
+			return zo;
+		}
+	
 //-----------------	
 }//Fin ZonaDao
 

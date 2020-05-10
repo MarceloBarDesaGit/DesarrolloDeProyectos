@@ -395,6 +395,8 @@ public class PersonaDao {
 //			traerJugador(int idJugador) 
 //			traerJugador(long dni) 
 //			traerJugador(String apellido)
+//	---> para Eliminar con Dependencias
+//			List<Jugador> traerJugadorPorEquipo(int equipo) 
 //------------------------------------------------
 		public Jugador traerJugador(int idJugador) throws HibernateException {
 			Jugador objeto = null;
@@ -431,12 +433,27 @@ public class PersonaDao {
 			}
 			return objeto;
 		}	
-	
+		
+		// Para el Eliminar
+		//----------------------
+		public List<Jugador> traerJugadorPorEquipo(int equipo) throws HibernateException {
+			List<Jugador> jugadores = null;
+			try {
+				iniciaOperacion();
+				String query = "from Jugador j where j.cgoEquipo = " + equipo;
+				jugadores = session.createQuery(query).list();
+			} finally {
+				session.close();
+			}
+			return jugadores;
+		}
 //-----------------------------------------------		
 // ARBITRO
 //			traerArbitro(int idArbitro) 
 //			traerArbitro(long dni) 
 //			traerArbitro(String apellido)
+//	---> para Eliminar con Dependencias
+//			List<Jugador> traerArbitroPorPartido(int partido) 	
 //------------------------------------------------
 	public Arbitro traerArbitro(int idArbitro) throws HibernateException {
 		Arbitro objeto = null;
@@ -474,8 +491,23 @@ public class PersonaDao {
 		return objeto;
 	}	
 		
+	// Para el Eliminar
+	//----------------------
+	public List<Arbitro> traerArbitroPorPartido(int partido) throws HibernateException {
+		List<Arbitro> arbitros = null;
+		try {
+			iniciaOperacion();
+			String query = "from Arbitro a where a.cgoPartido = " + partido;
+			arbitros = session.createQuery(query).list();
+		} finally {
+			session.close();
+		}
+		return arbitros;
+	}	
+	
+	
 //-------------------------------------------------------------
-//	List<tabla> traerTabla()  -  LISTADOS  GENERRALES
+//	LISTADOS  GENERRALES  -  List<tabla> traerTabla()  -  
 //-------------------------------------------------------------	
 // 	PERSONA
 //			List<Persona> traerPersona()	--> Listar TODAs las Personas
@@ -569,7 +601,7 @@ public class PersonaDao {
 		}
 		return lista;
 	}	
-	
+
 //	@SuppressWarnings("unchecked")        // HACERLO POR CADA OPCION
 //	public List<Jugador> traerJugador(int goles, int amarillas, int rojas) throws HibernateException {
 //		List<Jugador> lista = null;

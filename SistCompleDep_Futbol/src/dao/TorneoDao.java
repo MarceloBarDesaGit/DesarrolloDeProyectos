@@ -1,27 +1,28 @@
 package dao;
 
-	import java.time.LocalDate;
-	import java.util.List;
-	import org.hibernate.HibernateException;
-	import org.hibernate.Session;
-	import org.hibernate.Transaction;
-	//--------
-	import datos.Torneo;
+import java.time.LocalDate;
+import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+//--------
+import datos.Torneo;
 
-	public class TorneoDao {
-		private static Session session;
-		private Transaction tx;
+public class TorneoDao {
+	private static Session session;
+	private Transaction tx;
 		
-		//---------------------
-		// Conexión a BD y creación de la Session
-		protected void iniciaOperacion() throws HibernateException {
-			session = HibernateUtil.getSessionFactory().openSession();
-			tx = session.beginTransaction();
-		}
-		protected void manejaExcepcion(HibernateException he) throws HibernateException {
-			tx.rollback();
-			throw new HibernateException("ERROR en la capa de acceso a datos", he);
-		}
+	//---------------------
+	// Conexión a BD y creación de la Session
+	protected void iniciaOperacion() throws HibernateException {
+		session = HibernateUtil.getSessionFactory().openSession();
+		tx = session.beginTransaction();
+	}
+	protected void manejaExcepcion(HibernateException he) throws HibernateException {
+		tx.rollback();
+		throw new HibernateException("ERROR en la capa de acceso a datos", he);
+	}
 		
 //-------------------------------------------------------
 //   Agregar-Eliminar-Modificar-Traer - List de Contacto
@@ -33,9 +34,12 @@ package dao;
 			iniciaOperacion();
 			id = Integer.parseInt(session.save(objeto).toString());
 			tx.commit();
+			//throw new HibernateException("El Torneo con el ID: " + objeto.getDetalleTorneo() + "  se Agrego correctamente.");
+
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 			throw he;
+			//throw new HibernateException("El Torneo con el ID: " + objeto.getDetalleTorneo() + "  YA existe en la BD.");
 		} finally {
 			session.close();
 		}
@@ -62,24 +66,6 @@ package dao;
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
-			tx.commit();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		} finally {
-			session.close();
-		}
-	}
-
-	// Borrado Logico
-	public void Borrar(Torneo objeto) throws HibernateException {
-		try {
-			iniciaOperacion();
-			// --Control del nuevo Estado
-			// para la tabla de Torneo que me pide el estado.
-			// Estafo = "A"
-			// FechaCtrl=xx/xx/xx
-			// FechaModf=xx/xx/xx
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
@@ -125,7 +111,18 @@ package dao;
 		return objeto;
 	}
 
-//-------------------------------------------------------------
+//	public void traerUltimoRegTorneo() throws HibernateException {
+//		try {
+//			iniciaOperacion();
+//	        String query = "Select count(*) from Torneo";			
+//	        int countReg = session.createQuery(query);
+//		} finally {
+//			session.close();
+//		}
+//	}	 
+	
+
+	//-------------------------------------------------------------
 //	List<tabla> traerTabla()  
 //-------------------------------------------------------------
 //	 	TORNEO
@@ -152,7 +149,7 @@ package dao;
 
 	@SuppressWarnings("unchecked")
 	public List<Torneo> traerTorneos(String sponsor) throws HibernateException {
-		List<Torneo> lista = null;
+		List<Torneo> objeto = null;
 		try {
 			iniciaOperacion();
 			String query = "from Torneo e "
@@ -160,11 +157,11 @@ package dao;
 					+ "order by "
 					+ "e.fechaTorneo asc "
 					+ "e.sponsorTorneo asc";
-			lista = session.createQuery(query).list();
+			objeto = session.createQuery(query).list();
 		} finally {
 			session.close();
 		}
-		return lista;
+		return objeto;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -203,6 +200,7 @@ package dao;
 		return objeto;
 	}
 //-----------------	
+
 }//Fin TorneoDao
 
 

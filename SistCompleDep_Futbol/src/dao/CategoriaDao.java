@@ -4,6 +4,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 //--------
 import datos.Categoria;
 
@@ -114,7 +115,7 @@ public class CategoriaDao {
 		try {
 			iniciaOperacion();
 		  //Casteo del tipo Categoria
-	        String query = "from Categoria c where c.Categoria=" + Categ;
+	        String query = "from Categoria c where c.descripCategoria=" + Categ;
 			objeto = (Categoria) session.createQuery(query).uniqueResult();
 		} finally {
 			session.close();    
@@ -126,7 +127,9 @@ public class CategoriaDao {
 //	List<tabla> traerTabla()  
 //-------------------------------------------------------------	
 // 	CATEGORIA
-//			List<Categoria> traer()	--> Listar TODAs las Personas
+//			List<Categoria> traerCategoria()	--> Listar TODAs
+//	 --> para Elimiinar con Dependencias
+//
 //-------------------------------------------------------------	
 
 	@SuppressWarnings("unchecked")
@@ -134,7 +137,7 @@ public class CategoriaDao {
 		List<Categoria> lista = null;
 		try {
 			iniciaOperacion();
-	        String query = "from Categoria e order by e.nombreCategoria asc";
+	        String query = "from Categoria c order by c.descripCategoria asc";
 			lista = session.createQuery(query).list();
 		} finally {
 			session.close();
@@ -142,6 +145,8 @@ public class CategoriaDao {
 		return lista;
 	}	
 
+	
+	
 //-----------------	
 }//Fin CategoriaDao
 

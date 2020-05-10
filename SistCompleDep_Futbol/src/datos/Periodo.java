@@ -1,12 +1,16 @@
 package datos;
 
+import java.util.Set;
+
 public class Periodo {
-	private int idPeriodo;          // PK
-	private String detallePeriodo;  //   Mensual / Bimestral / Cuatrimestral / Semestral / Anual / Simple Eliminación
+	private int idPeriodo;              // PK 100
+	private String detallePeriodo;      //   Mensual / Bimestral / Cuatrimestral / Semestral / Anual / Simple Eliminación
+	private Set<Campeonato> campeonato; // (NO va en el Constructor)  Campeonato Senior 2019 - Campeonato Libre - 20119 - Campeonato Veterano 2019
 	
-//-------------------------------------
+	//-------------------------------------
 //Constructores
 	public Periodo() {}
+	
 	public Periodo(String detallePeriodo) {
 		super();
 		this.detallePeriodo = detallePeriodo;
@@ -27,6 +31,13 @@ public class Periodo {
 		detallePeriodo = detallePeriodo;
 	}
 
+	//------ SET <..> ------
+	public Set<Campeonato> getCampeonato() {
+		return campeonato;
+	}
+	public void setCampeonato(Set<Campeonato> campeonato) {
+		this.campeonato = campeonato;
+	}
 //-------------------------------------
 //tostring
 	@Override

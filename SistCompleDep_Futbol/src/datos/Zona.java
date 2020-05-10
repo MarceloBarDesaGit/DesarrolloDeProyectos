@@ -1,19 +1,19 @@
 package datos;
 
+import java.util.Set;
+
 public class Zona {
-	private int idZona;            // PK   1     
-	private String nombreZona;    //        Senior A B C - Libre A B C - Veterano A B C - Empresa A B C - Colegio A B C
-	private int cgoTorneo;        // FK son cgo__
+	private int idZona;               // PK 2     
+	private String nombreZona;        // Senior - Libre - Veterano - Empresa - Colegio
+	private Set<Campeonato> campeonato; // (NO va en el Constructor)  Campeonato Senior 2019 - Campeonato Libre - 20119 - Campeonato Veterano 2019
 //-------------------------------------
 //Constructores
+	public Zona() {}
 
-	public Zona() {
-	}
-
-	public Zona(String nombreZona, int cgoTorneo) {
+	public Zona(int idZona, String nombreZona) {
 		super();
+		this.idZona =idZona;
 		this.nombreZona = nombreZona;
-		this.cgoTorneo = cgoTorneo;
 	}
 
 //-------------------------------------
@@ -21,7 +21,6 @@ public class Zona {
 	public int getIdZona() {
 		return idZona;
 	}
-
 	protected void setIdZona(int idZona) {
 		this.idZona = idZona;
 	}
@@ -30,24 +29,23 @@ public class Zona {
 	public String getNombreZona() {
 		return nombreZona;
 	}
-
 	public void setNombreZona(String nombreZona) {
 		this.nombreZona = nombreZona;
 	}
 
-	public int getCgoTorneo() {
-		return cgoTorneo;
+	//------ SET <..> ------
+	public Set<Campeonato> getCampeonato() {
+		return campeonato;
+	}
+	public void setCampeonato(Set<Campeonato> campeonato) {
+		this.campeonato = campeonato;
 	}
 
-	public void setCgoTorneo(int cgoTorneo) {
-		this.cgoTorneo = cgoTorneo;
-	}
-
-//-------------------------------------
+	//-------------------------------------
 //tostring	
 	@Override
 	public String toString() {
-		return "Zona [ " + idZona + "] - " + nombreZona + " - Codigo de Torneo: " + cgoTorneo;
+		return "Zona [ " + idZona + "] - " + nombreZona;
 	}
 
 }

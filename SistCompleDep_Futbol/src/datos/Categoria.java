@@ -4,18 +4,18 @@ import java.util.Set;
 
 public class Categoria {
 
-	private int idCategoria;    // PK con cod___ 1
-	private String Categoria;   //               Senior - Libre - Veterano - Empresa - Colegio 
-	private Set<Zona> cgoZona;  // FK con cgo___ Senior A B C - Libre A B C - Veterano A B C - Empresa A B C - Colegio A B C 
+	private int idCategoria;            // PK con cod___ 1
+	private String descripCategoria;    //    Senior A B C - Libre A B C - Veterano A B C - Empresa A B C - Colegio A B C 
+	private Set<Campeonato> campeonato; // (NO va en el Constructor)  Campeonato Senior 2019 - Campeonato Libre - 20119 - Campeonato Veterano 2019
 
 //-------------------------------------
 //Constructores
 	public Categoria() {
 	}
 
-	public Categoria(String categoria) {
+	public Categoria(String descripCategoria) {
 		super();
-		Categoria = categoria;
+		this.descripCategoria = descripCategoria;
 	}
 
 //-------------------------------------
@@ -29,27 +29,26 @@ public class Categoria {
 	}
 //-----------
 	
-	public String getCategoria() {
-		return Categoria;
+	public String getDescripCategoria() {
+		return descripCategoria;
+	}
+	public void setDescripCategoria(String descripCategoria) {
+		this.descripCategoria = descripCategoria;
 	}
 
-	public void setCategoria(String categoria) {
-		Categoria = categoria;
+	//------ SET <..> ------
+	public Set<Campeonato> getCampeonato() {
+		return campeonato;
 	}
-
-	public Set<Zona> getCgoZona() {
-		return cgoZona;
+	public void setCampeonato(Set<Campeonato> campeonato) {
+		this.campeonato = campeonato;
 	}
-
-	public void setCgoZona(Set<Zona> cgoZona) {
-		this.cgoZona = cgoZona;
-	}	
 	
 //-------------------------------------
 //tostring	
 	@Override
 	public String toString() {
-		return "Categoria: ID [ " + idCategoria + " ] - " + Categoria;
+		return "Categoria: ID [ " + idCategoria + " ] - " + descripCategoria;
 	}
 
 //------------------------

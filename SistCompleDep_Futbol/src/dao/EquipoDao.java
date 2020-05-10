@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import datos.Categoria;
 //--------
 import datos.Equipo;
 
@@ -132,7 +134,9 @@ public class EquipoDao {
 //			List<Equipo> traerEquipo(LocalDate fechaAlta)	
 //			List<Equipo> traerEquipoPorFechaAlta(LocalDate fechaAlta)	
 //			List<Equipo> traerEquipo(LocalDate fechaDesde, LocalDate fechaHasta, int zona)
-	//-------------------------------------------------------------	
+//	 --> para Eliminar
+//			List<Equipo> traerCategoriaPorEquipo(int categoria)
+//-------------------------------------------------------------	
 	@SuppressWarnings("unchecked")
 	public List<Equipo> traerEquipo() throws HibernateException {
 		List<Equipo> lista = null;
@@ -188,8 +192,8 @@ public class EquipoDao {
 		try {
 			iniciaOperacion();
 			String query = "from Equipo e "
-					+ "where (e.FechaAltaEquipo >=" + fechaDesde + " and j.FechaAltaEquipo <=" + fechaHasta 
-					+ ") order by "
+					+ "where (e.FechaAltaEquipo >=" + fechaDesde + " and j.FechaAltaEquipo <=" + fechaHasta +")"
+					+ " order by "
 					+ "e.cgoZona asc "
 					+ "e.nombreEquipo asc";
 			objeto = session.createQuery(query).list();
@@ -205,9 +209,9 @@ public class EquipoDao {
 		try {
 			iniciaOperacion();
 			String query = "from Equipo e "
-					+ "where (e.FechaAltaEquipo >=" + fechaDesde + " and j.FechaAltaEquipo <=" + fechaHasta 
-					+ ") and (e.cgoZona=" + zona 
-					+ ") order by "
+					+ "where (e.FechaAltaEquipo >=" + fechaDesde + " and j.FechaAltaEquipo <=" + fechaHasta +")"
+					+ " and (e.cgoZona=" + zona +")"
+					+ " order by "
 					+ "e.cgoZona asc "
 					+ "e.nombreEquipo asc";
 			objeto = session.createQuery(query).list();
@@ -215,6 +219,23 @@ public class EquipoDao {
 			session.close();
 		}
 		return objeto;
+	}
+	
+	// Para el Eliminar
+	//------------------------
+	public List<Equipo> traerCategoriaPorEquipo(int categoria) throws HibernateException {
+		List<Equipo> equipos = null;
+		try {
+			iniciaOperacion();
+			String query = "from Equipo e where e.cgoCategoria = " + categoria;
+			equipos = session.createQuery(query).list();
+
+		} finally {
+			session.close();
+		}
+		return equipos;
 	}	
+	
+	
 //-----------------	
 }//Fin EquipoDao

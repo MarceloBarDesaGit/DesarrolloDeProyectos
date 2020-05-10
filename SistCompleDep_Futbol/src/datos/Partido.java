@@ -4,20 +4,22 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class Partido {
-	private int idPartido;                   // PK con cgo____  187          
-	private int jornadaCampPartido;          //                 8
-	private LocalDate fechaPartido;          //                 26/04/2020
-	private Set<Campeonato> cgocampeonato;   // Relación UaU    Apertura IDA
-	private Set<Torneo> cgotorneo;           // Relación UaU    Torneo Liga Aylen Bco. Frances 
-	private Set<Categoria> cgoCategoria;     // Relación UaU    Senior    / Libre / Veteranos / Empresa / Colegios
-	private Set<CanchaHora> cgoCanchaHora;   // Relación UaU    Aylen 1 - 09:00
-	private Set<Equipo> cgoEquipoLocPartido; // Relación UaU    Equipo AAA
-	private int resultadoLocPartido;         //                 3       
-	private Set<Equipo> cgoEquipoVisPartido; // Relación UaU    Equipo BBB
-	private int resultadoVisPartido;         //                 1
-	private Set<Arbitro> cgoArbitroPartido;  // Relación UaU    40 (Juan Quiroz)
-	private Set<Sancion> cgoSanciones;       // 1  Roja directa por emppjon al arbitro por parte del jugador del equipoLoc, partido indirigible. suspendo a los 40m 2T
-//-------------------------------------
+	private int idPartido;                // PK con cgo____  187          
+	private int jornadaCampPartido;       //                 8
+	private LocalDate fechaPartido;       //                 26/04/2020
+	private Set<Campeonato> campeonato;   // Relación UaU    Apertura IDA
+	private Set<Torneo> torneo;           // Relación UaU    Torneo Liga Aylen Bco. Frances 
+	private Set<Categoria> categoria;     // Relación UaU    Senior    / Libre / Veteranos / Empresa / Colegios
+	private Set<CanchaHora> canchaHora;   // Relación UaU    Aylen 1 - 09:00
+	private Set<Equipo> equipoLocPartido; // Relación UaU    Equipo AAA
+	private int resultadoLocPartido;      //                 3       
+	private Set<Equipo> equipoVisPartido; // Relación UaU    Equipo BBB
+	private int resultadoVisPartido;      //                 1
+	private Arbitro cgoArbitroPartido;    // Relación UaU    40 (Juan Quiroz)
+	private Set<Sancion> sanciones;       // 1  Roja directa por emppjon al arbitro por parte del jugador del equipoLoc, partido indirigible. suspendo a los 40m 2T
+//	private String articEquipoLoc;        // Art. 4  / 1A /Art. 10b
+//	private String articEquipoVis;        // Art. 4  / 1A /Art. 10b
+	//-------------------------------------
 //Constructores
 	public Partido() {}
 	
@@ -58,42 +60,42 @@ public class Partido {
 	}
 	
   //-------------------------
-	public Set<Campeonato> getCgocampeonato() {
-		return cgocampeonato;
+	public Set<Campeonato> getCampeonato() {
+		return campeonato;
 	}
 
-	public void setCgocampeonato(Set<Campeonato> cgocampeonato) {
-		this.cgocampeonato = cgocampeonato;
+	public void setCampeonato(Set<Campeonato> campeonato) {
+		this.campeonato = campeonato;
 	}
 
-	public Set<Torneo> getCgotorneo() {
-		return cgotorneo;
+	public Set<Torneo> getTorneo() {
+		return torneo;
 	}
 
-	public void setCgotorneo(Set<Torneo> cgotorneo) {
-		this.cgotorneo = cgotorneo;
+	public void setTorneo(Set<Torneo> torneo) {
+		this.torneo = torneo;
 	}
 
-	public Set<Categoria> getCgoCategoria() {
-		return cgoCategoria;
+	public Set<Categoria> getCategoria() {
+		return categoria;
 	}
 
-	public void setCgoCategoria(Set<Categoria> cgoCategoria) {
-		this.cgoCategoria = cgoCategoria;
+	public void setCategoria(Set<Categoria> categoria) {
+		this.categoria = categoria;
 	}
-	public Set<CanchaHora> getCgoCanchaHora() {
-		return cgoCanchaHora;
+	public Set<CanchaHora> getCanchaHora() {
+		return canchaHora;
 	}
-	public void setCgoCanchaHora(Set<CanchaHora> cgoCanchaHora) {
-		this.cgoCanchaHora = cgoCanchaHora;
-	}
-
-	public Set<Equipo> getCgoEquipoLocPartido() {
-		return cgoEquipoLocPartido;
+	public void setCanchaHora(Set<CanchaHora> canchaHora) {
+		this.canchaHora = canchaHora;
 	}
 
-	public void setCgoEquipoLocPartido(Set<Equipo> cgoEquipoLocPartido) {
-		this.cgoEquipoLocPartido = cgoEquipoLocPartido;
+	public Set<Equipo> getEquipoLocPartido() {
+		return equipoLocPartido;
+	}
+
+	public void setEquipoLocPartido(Set<Equipo> equipoLocPartido) {
+		this.equipoLocPartido = equipoLocPartido;
 	}
 
 	public int getResultadoLocPartido() {
@@ -104,12 +106,12 @@ public class Partido {
 		this.resultadoLocPartido = resultadoLocPartido;
 	}
 
-	public Set<Equipo> getCgoEquipoVisPartido() {
-		return cgoEquipoVisPartido;
+	public Set<Equipo> getEquipoVisPartido() {
+		return equipoVisPartido;
 	}
 
-	public void setCgoEquipoVisPartido(Set<Equipo> cgoEquipoVisPartido) {
-		this.cgoEquipoVisPartido = cgoEquipoVisPartido;
+	public void setEquipoVisPartido(Set<Equipo> equipoVisPartido) {
+		this.equipoVisPartido = equipoVisPartido;
 	}
 
 	public int getResultadoVisPartido() {
@@ -120,20 +122,20 @@ public class Partido {
 		this.resultadoVisPartido = resultadoVisPartido;
 	}
 	
-	public Set<Arbitro> getCgoArbitroPartido() {
+	public Arbitro getCgoArbitroPartido() {
 		return cgoArbitroPartido;
 	}
 
-	public void setCgoArbitroPartido(Set<Arbitro> cgoArbitroPartido) {
+	public void setCgoArbitroPartido(Arbitro cgoArbitroPartido) {
 		this.cgoArbitroPartido = cgoArbitroPartido;	
 	}	
 
-	public Set<Sancion> getCgoSanciones() {
-		return cgoSanciones;
+	public Set<Sancion> getSanciones() {
+		return sanciones;
 	}
 
-	public void setCgoSanciones(Set<Sancion> cgoSanciones) {
-		this.cgoSanciones = cgoSanciones;
+	public void setSanciones(Set<Sancion> sanciones) {
+		this.sanciones = sanciones;
 	}
 
 //-------------------------------------

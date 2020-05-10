@@ -128,12 +128,14 @@ package dao;
 //-------------------------------------------------------------
 //	List<tabla> traerTabla()  
 //-------------------------------------------------------------
-//	 	CAMPEONATO
+//	CAMPEONATO
 //				List<Campeonato> traerCampeonato()	--> Listar TODAs las Personas
 //				List<Campeonato> traerCampeonatos(int temporada)
 //				List<Campeonato> traerCampeonato(LocalDate fechaAlta)	
 //				List<Campeonato> traerCampeonato(LocalDate fechaDesde, LocalDate fechaHasta, int temporada)
-	// -------------------------------------------------------------
+//	 --> para Elimiinar con Dependencias
+//              List<Campeonato> traerCampeonatoPorTorneo(int torneo)
+// -------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public List<Campeonato> traerCampeonato() throws HibernateException {
 		List<Campeonato> lista = null;
@@ -174,8 +176,8 @@ package dao;
 		try {
 			iniciaOperacion();
 			String query = "from Campeonato e "
-					+ "where (e.fechaCampeonato >=" + fechaDesde + " and j.fechaCampeonato <=" + fechaHasta 
-					+ ") order by "
+					+ "where (e.fechaCampeonato >=" + fechaDesde + " and j.fechaCampeonato <=" + fechaHasta +")" 
+					+ "order by "
 					+ "e.fechaCampeonato asc "
 					+ "e.nombreCampeonato asc";
 			objeto = session.createQuery(query).list();
@@ -192,9 +194,9 @@ package dao;
 		try {
 			iniciaOperacion();
 			String query = "from Campeonato e "
-					+ "where (e.fechaCampeonato >=" + fechaDesde + " and j.fechaCampeonato <=" + fechaHasta 
-					+ ") and (e.cgoTemporada=" + temporada 
-					+ ") order by "
+					+ "where (e.fechaCampeonato >=" + fechaDesde + " and j.fechaCampeonato <=" + fechaHasta +")" 
+					+ " and (e.cgoTemporada=" + temporada +")"
+					+ " order by "
 					+ "e.fechaCampeonato asc "
 					+ "e.nombreCampeonato asc";
 			objeto = session.createQuery(query).list();
@@ -203,6 +205,23 @@ package dao;
 		}
 		return objeto;
 	}
+	
+		
+// Para el Eliminar
+//------------------------
+	public List<Campeonato> traerCampeonatoPorTorneo(int torneo) throws HibernateException {
+		List<Campeonato> campe = null;
+		try {
+			iniciaOperacion();
+			String query = "from Campeonato ca where ca.cgoTorneo = " + torneo;
+			campe = session.createQuery(query).list();
+		} finally {
+			session.close();
+		}
+		return campe;
+	}
+
+
 //-----------------	
 }//Fin CampeonatoDao
 

@@ -6,26 +6,30 @@ import java.util.Set;
 public class Equipo {
 	private int idEquipo;                //  PK con cod_____
 	private String nombreEquipo;
-	private Set<Zona> cgoZona;           // FK   las FK son cgo_____ 
+	private Partido cgopartido;      // FK Relación UaM  (va en el Constructor)
 	private LocalDate fechaEquipoAlta;
-	private Set<Jugador> cgojugador;     // Relación UaM
+	private Set<Jugador> jugador;     // (NO va en el Constructor)
+	private int puntosEquipoRnk;        //  8 (Valor Amarilla 1 - Roja 3)
 	//---
-	private char controlEquipo;
-	private LocalDate fechaCtrlEquipo;   // Solo para las Bajas
-	private LocalDate fechaModifEquipo;  // Fecha de Modificaión para Altas y Modificaciones
+	private char controlEquipo;			// A B M
+	private LocalDate fechaCtrlEquipo;  // xx/xx/xx
 //-------------------------------------
 //Constructores
-	public Equipo() {}  // SIEMPRE HAY que implementar el contructor VACIO
+	public Equipo() {} 
 
-// IMPORTANTE:  NUNCA VA EL  id  --> En el constructor por ser autoincrementable
-	public Equipo(String nombreEquipo, int cgoZona, LocalDate fechaEquipoAlta) {
+
+
+	// IMPORTANTE:  NUNCA VA EL  id  
+//	--> En el constructor por ser autoincrementable
+	public Equipo(String nombreEquipo, Partido cgopartido, LocalDate fechaEquipoAlta,int puntosEquipoRnk) {
 		super();
 		this.nombreEquipo = nombreEquipo;
+		this.cgopartido= cgopartido;
 		this.fechaEquipoAlta = fechaEquipoAlta;
+		this.puntosEquipoRnk = puntosEquipoRnk;
 		// ----------
 		this.controlEquipo = 'A';
 		this.fechaCtrlEquipo = LocalDate.now();
-		this.fechaModifEquipo = LocalDate.now();
 	}
 
 //-------------------------------------
@@ -33,69 +37,57 @@ public class Equipo {
 	public int getIdEquipo() {
 		return idEquipo;
 	}
-
-// SIEMPRE VA protected
+  // SIEMPRE VA protected
 	protected void setIdEquipo(int idEquipo) {
 		this.idEquipo = idEquipo;
 	}
-//----------------
-
+  //----------------
 	public String getNombreEquipo() {
 		return nombreEquipo;
 	}
-
 	public void setNombreEquipo(String nombreEquipo) {
 		this.nombreEquipo = nombreEquipo;
 	}
-
-
 	public LocalDate getFechaEquipoAlta() {
 		return fechaEquipoAlta;
 	}
-
 	public void setFechaEquipoAlta(LocalDate fechaEquipoAlta) {
 		this.fechaEquipoAlta = fechaEquipoAlta;
 	}
 	
+	public int getPuntosEquipoRnk() {
+		return puntosEquipoRnk;
+	}
+
+	public void setPuntosEquipoRnk(int puntosEquipoRnk) {
+		this.puntosEquipoRnk = puntosEquipoRnk;
+	}
+	
 	//------ Set<Clase> ------
-
-	public Set<Zona> getCgoZona() {
-		return cgoZona;
+	public Partido getCgopartido() {
+		return cgopartido;
 	}
-
-	public void setCgoZona(Set<Zona> cgoZona) {
-		this.cgoZona = cgoZona;
+	public void setCgopartidoo(Partido cgopartido) {
+		this.cgopartido = cgopartido;
 	}	
-		
-	public Set<Jugador> getCgojugador() {
-		return cgojugador;
+	//-------	
+	public Set<Jugador> getJugador() {
+		return jugador;
+	}
+	public void setCgojugador(Set<Jugador> jugador) {
+		this.jugador = jugador;
 	}
 
-	public void setCgojugador(Set<Jugador> cgojugador) {
-		this.cgojugador = cgojugador;
-	}
-
-//--------- CONTROL ----------------
-	public LocalDate getFechaModifEquipo() {
-		return fechaModifEquipo;
-	}
-
-	public void setFechaModifEquipo(LocalDate fechaModifEquipo) {
-		this.fechaModifEquipo = fechaModifEquipo;
-	}
-
+//--------- CONTROL ---------------
 	public char getControlEquipo() {
 		return controlEquipo;
 	}
-
 	public void setControlEquipo(char controlEquipo) {
 		this.controlEquipo = controlEquipo;
 	}
-
 	public LocalDate getFechaCtrlEquipo() {
 		return fechaCtrlEquipo;
 	}
-
 	public void setFechaCtrlEquipo(LocalDate fechaCtrlEquipo) {
 		this.fechaCtrlEquipo = fechaCtrlEquipo;
 	}
@@ -119,10 +111,10 @@ public class Equipo {
 			break;
 		}
 		return "Equipo [ " + idEquipo + "] - " + nombreEquipo
-				+ "      \ncodZona:" + cgoZona
+				+ "      \nPartido:" + cgopartido
 	            + "      \nFecha de Alta: " + funciones.Funciones.traerFechaCorta(fechaEquipoAlta)
-                + "      \nEatado Actual: [ " + estadoEqui + " - " + funciones.Funciones.traerFechaCorta(getFechaCtrlEquipo()) + " ]"
-                + "      \nFecha de Modificación: [ " + funciones.Funciones.traerFechaCorta(getFechaModifEquipo()) +" ]";
+                + "      \nEatado Actual: [ " + estadoEqui + " - " 
+	            + funciones.Funciones.traerFechaCorta(getFechaCtrlEquipo()) + " ]";
 	}
 
 	

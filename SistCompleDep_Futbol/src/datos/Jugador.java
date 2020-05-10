@@ -1,26 +1,28 @@
 package datos;
 
 import java.time.LocalDate;
-import java.util.Set;         // debo importar cuando uso Set<Equipo>
+//import java.util.Set;         // debo importar cuando uso Set<Equipo>
 
 public class Jugador extends Persona {
 	private int idJugador;               // PK  120   
     private int golesJugador;            //     15
     private int tarjAmaJugador;          //     3
     private int tarjRojaJugador;         //     0
-	private Set<Equipo> cgoEquipo;       // FK  Relacion UaU
+	private Equipo cgoEquipo;            // FK  Relacion UaU
 	//-----------------
 	private char controlJugador;         //     A
 	private LocalDate fechaCtrlJugador;  //     19/04/20 Solo para las Altas
 
-//-------------------------------------
+
+	//-------------------------------------
 //Constructores
 
 	public Jugador() {}
 	
 	public Jugador(long dni, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaDeAlta,
 			int edad, String username, String password, 
-			int golesJugador, int tarjAmaJugador, int tarjRojaJugador, char controlJugador, LocalDate fechaCtrlJugador) {
+			int golesJugador, int tarjAmaJugador, int tarjRojaJugador, Equipo equipo,
+			char controlJugador, LocalDate fechaCtrlJugador) {
 		super(dni, nombre, apellido, fechaNacimiento, fechaDeAlta, edad, username, password);
 		this.golesJugador = golesJugador;
 		this.tarjAmaJugador = tarjAmaJugador;
@@ -65,11 +67,11 @@ public class Jugador extends Persona {
 		this.tarjRojaJugador = tarjRojaJugador;
 	}
 
-	public Set<Equipo> getCgoEquipo() {
+	public Equipo getCgoEquipo() {
 		return cgoEquipo;
 	}
 
-	public void setCgoEquipo(Set<Equipo> cgoEquipo) {
+	public void setCgoEquipo(Equipo cgoEquipo) {
 		this.cgoEquipo = cgoEquipo;
 	}
 
@@ -115,6 +117,11 @@ public class Jugador extends Persona {
 				+ "      \nEstado: " + estadoJug + " -  " + funciones.Funciones.traerFechaCorta(getFechaCtrlJugador());	
 	}
 
+//	@Override
+//	public boolean equals(Object o) {
+//		// Comparo los productos por id
+//		return this.idProducto == ((Producto) o).getIdProducto();
+//	}
 	
 //-----------------
 }// Fin Jugador
