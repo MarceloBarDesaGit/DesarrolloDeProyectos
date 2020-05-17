@@ -7,29 +7,34 @@ public class Partido {
 	private int idPartido;                // PK con cgo____  187          
 	private int jornadaCampPartido;       //                 8
 	private LocalDate fechaPartido;       //                 26/04/2020
-	private Set<Campeonato> campeonato;   // Relación UaU    Apertura IDA
+	private int resultadoLocPartido;      //                 3       
+	private int resultadoVisPartido;      //                 1
+	private String articEquipoLoc;        // Art. 4  / 1A /Art. 10b
+	private String articEquipoVis;        // Art. 4  / 1A /Art. 10b
+	//-----------
+	private Arbitro cgoArbitroPartido;    // Relación UaU    40 (Juan Quiroz)
+	private Campeonato cgoCampeonato;   // Relación UaU    Apertura IDA
 	private Set<Torneo> torneo;           // Relación UaU    Torneo Liga Aylen Bco. Frances 
 	private Set<Categoria> categoria;     // Relación UaU    Senior    / Libre / Veteranos / Empresa / Colegios
 	private Set<CanchaHora> canchaHora;   // Relación UaU    Aylen 1 - 09:00
 	private Set<Equipo> equipoLocPartido; // Relación UaU    Equipo AAA
-	private int resultadoLocPartido;      //                 3       
 	private Set<Equipo> equipoVisPartido; // Relación UaU    Equipo BBB
-	private int resultadoVisPartido;      //                 1
-	private Arbitro cgoArbitroPartido;    // Relación UaU    40 (Juan Quiroz)
 	private Set<Sancion> sanciones;       // 1  Roja directa por emppjon al arbitro por parte del jugador del equipoLoc, partido indirigible. suspendo a los 40m 2T
-//	private String articEquipoLoc;        // Art. 4  / 1A /Art. 10b
-//	private String articEquipoVis;        // Art. 4  / 1A /Art. 10b
 	//-------------------------------------
 //Constructores
 	public Partido() {}
 	
 	public Partido(int jornadaCampPartido, LocalDate fechaPartido,
-			int resultadoLocPartido, int resultadoVisPartido) {
+			int resultadoLocPartido, int resultadoVisPartido, 
+				String articEquipoLoc, String articEquipoVis,Campeonato cgoCampeonato) {
 		super();
 		this.jornadaCampPartido = jornadaCampPartido;
 		this.fechaPartido = fechaPartido;
 		this.resultadoLocPartido = resultadoLocPartido;
 		this.resultadoVisPartido = resultadoVisPartido;
+		this.articEquipoLoc = articEquipoLoc;
+		this.articEquipoVis = articEquipoVis;
+		this.cgoCampeonato = cgoCampeonato;
 	}
 //-------------------------------------
 //Getter y Setter
@@ -60,12 +65,12 @@ public class Partido {
 	}
 	
   //-------------------------
-	public Set<Campeonato> getCampeonato() {
-		return campeonato;
+	public Campeonato getCgoCampeonato() {
+		return cgoCampeonato;
 	}
 
-	public void setCampeonato(Set<Campeonato> campeonato) {
-		this.campeonato = campeonato;
+	public void setCgoCampeonato(Campeonato cgoCampeonato) {
+		this.cgoCampeonato = cgoCampeonato;
 	}
 
 	public Set<Torneo> getTorneo() {
@@ -138,22 +143,28 @@ public class Partido {
 		this.sanciones = sanciones;
 	}
 
+	public String getArticEquipoLoc() {
+		return articEquipoLoc;
+	}
+
+	public void setArticEquipoLoc(String articEquipoLoc) {
+		this.articEquipoLoc = articEquipoLoc;
+	}
+
+	public String getArticEquipoVis() {
+		return articEquipoVis;
+	}
+
+	public void setArticEquipoVis(String articEquipoVis) {
+		this.articEquipoVis = articEquipoVis;
+	}
 //-------------------------------------
 //tostring	
-//	@Override
-//	public String toString() {
-//		return "Partido [idPartido=" + idPartido + ", codPartido=" + codPartido + ", jornadaCampPartido=",
-//				+ jornadaCampPartido + ", fechaPartido=" + fechaPartido + ", cgocampeonato=" + cgocampeonato
-//				+ ", cgotorneo=" + cgotorneo + ", cgocategoria=" + cgocategoria + ", cgocanchaHora=" + cgocanchaHora
-//				+ ", cgoequipoLocPArtido=" + cgoequipoLocPArtido + ", resultadoLocPartido=" + resultadoLocPartido
-//				+ ", cgoequipoVisPArtido=" + cgoequipoVisPArtido + ", resultadoVisPartido=" + resultadoVisPartido + "]";
-//	}
-
 	@Override
 	public String toString() {
 		return "Partido: [ " + idPartido + " ] - Jornada Nro.: " + jornadaCampPartido + " -  Fecha del Partido:" + fechaPartido
-				+ "      \nFResultado Local: ( " + resultadoLocPartido + " )"
-				+ "      \nFResultado Visitante: ( " + resultadoVisPartido + ")";
+				+ "      \nFResultado Local: ( " + resultadoLocPartido + " ) - Artículo: " + articEquipoLoc
+				+ "      \nFResultado Visitante: ( " + resultadoVisPartido + ") - Artículo: " + articEquipoVis;
 	}	
 	
 	

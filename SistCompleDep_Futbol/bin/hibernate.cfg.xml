@@ -73,7 +73,7 @@
 	</hibernate-configuration>
 
 	<!-- 
-		                                NO  <mapping resource = "mapeos/Cliente.hbm.xml"/>
+		                               NO  <mapping resource = "mapeos/Cliente.hbm.xml"/>
 		<mapping resource = "mapeos/Ubicacion.hbm.xml"/>	
 		<mapping resource = "mapeos/Contacto.hbm.xml"/>
 		<mapping resource = "mapeos/Persona.hbm.xml"/>             ********  va directamectamente la CLASE PADRE

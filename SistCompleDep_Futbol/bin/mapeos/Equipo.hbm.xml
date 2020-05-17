@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ * Tipo: Fichero de mapeo
+ * Extensión: .XML
+ * Nombre archivo: Equipo.hbm.xml
+ * Descripción: Se creará para CADA CLASE que queremos persistir un 
+ *				fichero xml con la información que permitirá Mapearla
+ *				a la clase, con una Base de Datos relacional. 
+ *              Este fichero estará siempre en el paquete SCR/MAPEOS.
+ * Fecha: 08/05/2020
+ * Version:  1.1.0805.0001    
+ * Autor: Barbieri Marcelo E.
+ * Modificación: __/__/2020. 
+ * Tipo de Modificación: 
+ * **************************************************************************
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- TABLA: Equipo -->
+	<hibernate-mapping>
+		<class name="datos.Equipo" table="equipo">       
+	<!-- Clave:  PRIMARIA -->
+			<id column="idEquipo" name="idEquipo">      
+				<generator class="identity" />
+			</id>
+     <!-- CAMPOS (No van los SET<..> NI los Tipos Equipo Equipo)-->				
+			<property column="nombreEquipo" name="nombreEquipo" type="string" />
+			<property column="fechaEquipoAlta" name="fechaEquipoAlta" type="LocalDate" />
+			<property column="puntosEquipoRnk" name="puntosEquipoRnk" type="int" />
+			<property column="controlEquipo" name="controlEquipo" type="char" />
+			<property column="fechaCtrlEquipo" name="fechaCtrlEquipo" type="LocalDate" />
+
+
+
+     <!-- RELACION se declaran los SET<Tabla> tabla-->
+			<set name = "campeonatos" table = "campeonato" order-by = "idCampeonato asc" inverse = "true"
+				lazy = "true" fetch = "select" >
+				<key column = "idEquipo" not-null = "true" />
+				<one-to-many class = "datos.Campeonato" />
+			</set >
+		</class>
+	</hibernate-mapping>

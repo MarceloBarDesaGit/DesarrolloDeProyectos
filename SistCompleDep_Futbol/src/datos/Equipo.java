@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class Equipo {
-	private int idEquipo;                //  PK con cod_____
+	private int idEquipo;              //  PK con cod_____
 	private String nombreEquipo;
-	private Partido cgopartido;      // FK Relación UaM  (va en el Constructor)
 	private LocalDate fechaEquipoAlta;
-	private Set<Jugador> jugador;     // (NO va en el Constructor)
-	private int puntosEquipoRnk;        //  8 (Valor Amarilla 1 - Roja 3)
+	private int puntosEquipoRnk;       //  8 (Valor Amarilla 1 - Roja 3)
+	private Partido cgopartido;        // FK Relación UaM  (va en el Constructor)
+	private Set<Jugador> jugador;      // (NO va en el Constructor)
 	//---
 	private char controlEquipo;			// A B M
 	private LocalDate fechaCtrlEquipo;  // xx/xx/xx

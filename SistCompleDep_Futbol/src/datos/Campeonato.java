@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class Campeonato {
 	private int idCampeonato;             // PK 25
@@ -11,7 +12,10 @@ public class Campeonato {
 	private Categoria cgoCategoria;		  //    Senior A B C - Libre A B C - Veterano A B C - Empresa A B C - Colegio A B C
     private Temporada cgoTemporada;       //	Apertura IDA / VUENTA - Clausura IDA / VUELTA - General IDA / VUELTA - Verano IDA
 	private Periodo cgoPeriodo;           //    Cuatrimestral / Semestral / Anual
-//-------------------------------------
+	private Set<Partido> partido;
+
+
+	//-------------------------------------
 //Constructores
 	public Campeonato() {}
 		
@@ -90,7 +94,16 @@ public class Campeonato {
 	public void setCgoPeriodo(Periodo cgoPeriodo) {
 		this.cgoPeriodo = cgoPeriodo;
 	}
+	
+//------ SET<...> -------
+	public Set<Partido> getPartido() {
+		return partido;
+	}
 
+	public void setPartido(Set<Partido> partido) {
+		this.partido = partido;
+	}
+	
 	//-------------------------------------
 //tostring
 	@Override

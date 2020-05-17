@@ -16,6 +16,16 @@ package negocio;
 
 		// AGREGAR
 		//--------------------
+//		public boolean agregarProducto(String codProducto, String descripProducto, float precioUniProd, LocalDate fechAlta) throws Exception {
+//		if (traerProducto(codProducto) != null) throw new Exception(" El Producto con el código de producto: [" +codProducto + "]  ya existe en Lista");
+//			int idProducto=1; 
+//			if (!lstProductos.isEmpty()) {              // Sí NO esta Vacia
+//				
+//		idProducto = lstProductos.get(lstProductos.size() - 1).getIdProducto() + 1; 
+//			}
+//		return lstProductos.add(new Producto(idProducto, codProducto, descripProducto, precioUniProd, fechAlta));   
+//	}
+		
 		public int agregarEquipo(Equipo e) {
 			int salida = 0;
 			Equipo eq = traerEquipo(e.getIdEquipo());

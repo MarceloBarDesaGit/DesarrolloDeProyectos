@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ * Tipo: Fichero de mapeo
+ * Extensión: .XML
+ * Nombre archivo: Torneo.hbm.xml
+ * Descripción: Se creará para CADA CLASE que queremos persistir un 
+ *				fichero xml con la información que permitirá Mapearla
+ *				a la clase, con una Base de Datos relacional. 
+ *              Este fichero estará siempre en el paquete SCR/MAPEOS.
+ * Fecha: 08/05/2020
+ * Version:  1.1.0805.0001    
+ * Autor: Barbieri Marcelo E.
+ * Modificación: __/__/2020. 
+ * Tipo de Modificación: 
+ * **************************************************************************
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- TABLA: Torneo -->
+	<hibernate-mapping>
+		<!-- Datos de la Tabla: Detalle de los CAMPO
+		     nombre de la clase incluyendo el paquete en el que se encuentra   
+		--> 
+		<class name="datos.Torneo" table="Torneo">       
+	<!-- Clave:  PRIMARIA -->
+			<id column="idTorneo" name="idTorneo">      
+				<!-- <generator class="identity" /> ******* "identity" indica que el id se genera automaticamente por cada carga 
+													si lo declare como AutoIncremental en la tabla-->
+			</id>
+			<!-- *********************
+				column:    Contiene el nombre de la columna de la TABLA en la base de datos asociado a la propiedad que
+				name:      es el nombre del Atributo en la clase Java y que contiene un nombre que puede ser distinto al 
+				           del campo 
+				type:      indica el tipo de la propiedad Java, establece el tipo información en Tipos básicos. 
+				           (http://www.cursohibernate.es/doku.php?id=unidades:04_claves_primarias_y_tipos_datos:01_tipos_basicos)        
+				<property> Se usan para declarar más propiedades Java, para ser mapejadas en la base de datos.
+			-->
+     <!-- CAMPOS (No van los SET<..> NI los Tipos Periodo Periodo)-->					
+			<property column="detalleTorneo" name="detalleTorneo" type="string" />
+			<property column="fechaTorneo" name="fechaTorneo" type="LocalDate" />
+			<property column="sponsorTorneo" name="sponsorTorneo" type="string" />
+     <!-- RELACION se declaran los SET<Tabla> tabla-->
+			<set name = "campeonatos" table = "campeonato" order-by = "idCampeonato asc" inverse = "true"
+				lazy = "true" fetch = "select" >
+				<key column = "idTorneo" not-null = "true" />
+				<one-to-many class = "datos.Campeonato" />
+			</set >
+		</class>
+	</hibernate-mapping>

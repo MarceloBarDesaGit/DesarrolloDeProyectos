@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="datos.Campeonato" table="campeonato">
+	<!-- Clave:  PRIMARIA -->
+		<id column="idCampeonato" name="idCampeonato">
+			<generator class="identity"/>
+		</id>
+     <!-- CAMPOS -->
+		<property column="descripCampeonato" name="descripCampeonato" type="string"/>
+		<property column="fechaCampeonato" name="fechaCampeonato" type="LocalDate"/>
+     <!-- RELACION -->
+		<many-to-one name="torneo" class="datos.Torneo"
+			column="cgoTorneo" not-null="true"/>	
+		<many-to-one name="categoria" class="datos.Categoria"
+			column="cgoCategoria" not-null="true"/>	
+		<many-to-one name="periodo" class="datos.Periodo"
+			column="cgoPeriodo" not-null="true"/>		
+		<many-to-one name="temporada" class="datos.Temporada"
+			column="cgoTemporada" not-null="true"/>			
+		<many-to-one name="zona" class="datos.Zona"
+			column="cgoZona" not-null="true"/>	
+						
+     <!-- RELACION se declaran los SET<Tabla> tabla-->
+		<set name="partidos" table="Partido" inverse="true"
+			lazy="true" fetch="select">
+			<key column="idCampeonato" not-null="true" />
+			<one-to-many class="datos.Partido" />
+		</set>			
+			
+	</class>
+</hibernate-mapping>
+<!-- 
+	private int idSolicitud;
+	private String estado; 
+	private Local localSolicitante;
+	private Local localSolicitado;
+	private Empleado empleadoSolicitante;
+	private Empleado empleadoSolicitado;
+	private Set<LineaSolicitud> lineasSolicitud;
+	private LocalDate fechaSolicitud;
+*****************
+		<many-to-one name="localSolicitante" class="datos.Local"
+			column="local_solicitante" not-null="true" />
+		<many-to-one name="localSolicitado" class="datos.Local"
+			column="local_solicitado" not-null="true" />
+		<many-to-one name="empleadoSolicitante"
+			class="datos.Empleado" column="empleado_solicitante" not-null="true" />
+		<many-to-one name="empleadoSolicitado"
+			class="datos.Empleado" column="empleado_solicitado" not-null="false" />
+
+		<set name="lineasSolicitud" table="linea_solicitud" inverse="true"
+			lazy="true" fetch="select">
+			<key column="solicitud" not-null="true" />
+			<one-to-many class="datos.LineaSolicitud" />
+		</set>
+-->

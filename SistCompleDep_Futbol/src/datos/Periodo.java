@@ -1,11 +1,10 @@
 package datos;
 
-import java.util.Set;
 
 public class Periodo {
 	private int idPeriodo;              // PK 100
 	private String detallePeriodo;      //   Mensual / Bimestral / Cuatrimestral / Semestral / Anual / Simple Eliminación
-	private Set<Campeonato> campeonato; // (NO va en el Constructor)  Campeonato Senior 2019 - Campeonato Libre - 20119 - Campeonato Veterano 2019
+	private Campeonato cgoCampeonato; // (NO va en el Constructor)  Campeonato Senior 2019 - Campeonato Libre - 20119 - Campeonato Veterano 2019
 	
 	//-------------------------------------
 //Constructores
@@ -28,15 +27,15 @@ public class Periodo {
 		return detallePeriodo;
 	}
 	public void setDetallePeriodo(String detallePeriodo) {
-		detallePeriodo = detallePeriodo;
+		this.detallePeriodo = detallePeriodo;
 	}
 
 	//------ SET <..> ------
-	public Set<Campeonato> getCampeonato() {
-		return campeonato;
+	public Campeonato getCgoCampeonato() {
+		return cgoCampeonato;
 	}
-	public void setCampeonato(Set<Campeonato> campeonato) {
-		this.campeonato = campeonato;
+	public void setCgoCampeonato(Campeonato cgoCampeonato) {
+		this.cgoCampeonato = cgoCampeonato;
 	}
 //-------------------------------------
 //tostring
